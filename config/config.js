@@ -1,0 +1,23 @@
+
+module.exports = {
+   internal_server_error: { "resultcode": 2030, "message": "Internal Server Error" },
+    error_retriving_data: { "resultcode": 2031, "message": "Some Error Occurred While Retrieving Data" },
+    image_path:"/opt/lampp/htdocs/images/notification_images/",
+    success: { "resultcode": 2032, "message": "Data Retrieving Successfully" },
+    session_expierd: { "resultcode": 2038, "message": "Session Expired, login again" },
+    auth_token_required:{"resultcode": 2040, "message": "Auth_token is required"},
+    not_data_found: { "resultcode": 2033, "message": "Data Not Found" },
+    wrong_username_password: { "resultcode": 2034, "message": "Incorrect Username Or Password" },
+    invalid_user: { "resultcode": 2034, "message": "invalid user id" },
+    no_data_found: { "resultcode": 2035, "message": "No data Found" },
+    data_insert_success: { "resultcode": 2036, "message": "Data Insert Successfully" },
+    data_update_success: { "resultcode": 2037, "message": "Data Update Successfully" },
+    partial_data: { "resultcode": 2038, "message": "Partial Data" },
+    invalid_role:{"resultcode": 2039, "message": "invalid role of user ,try again"},
+    logout_success: { "resultcode": 2040, "message": "Log Out Successfully" },
+    //serverKey: 'AAAAfexqmUs:APA91bHQER9hzNtDNZD5VclLlYAqx3rswf61PQkEq7pTeW4CxThHYgLKzhzzrJc8SYGOFS5vEw26r-DqPy7X0dXiqI9b4E-L_74hM-9qQ1quc1g3L7buJGIR4OYpFTgsg0ngNoECxgww',               
+    serverKey: 'AAAAPqZIkv8:APA91bEzkwdaXEBcaZq0vwhzLxyr397EgPAZ7Q779_JckQAIhQnOAQTYFhsohkrSxlmAGD84VUXCvLTz5PlphaO7toCQQTtJuxBiLky9W1JJTkk_qvy5Z_iTHH2hh0qrcqcehzSFSXy6',
+    //notification_type: {SM_SOCIAL_DISTANCE:"Social Distancing Violation",SM_MASK_DETECTION:"Mask Violation",SM_PEOPLE_DENSITY:"People Density Violation", SM_PEOPLE_COUNTING:"People Counting Violation",SM_DISINFECTION:"Disinfection Done"},
+    notification_type: {SM_SOCIAL_DISTANCE:1,SM_MASK_DETECTION:2,SM_PEOPLE_DENSITY:3, SM_PEOPLE_COUNTING:4,SM_DISINFECTION:5,SM_NEW_PERSON:6,SM_MASK_STATUS:7},
+    base_url:'https://smargtechnologies.in:453/',
+};

@@ -1,0 +1,31 @@
+{
+  "name": "apifile",
+  "version": "1.0.0",
+  "description": "npm install rand-token --save",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "datetime": "0.0.3",
+    "express": "^4.17.1",
+    "fcm-node": "^1.5.2",
+    "firebase-admin": "~6.2.0",
+    "mysql": "^2.18.1",
+    "mysql2": "^2.1.0",
+    "node-datetime": "^2.1.2",
+    "node-oauth2-server": "^2.4.0",
+    "nodemon": "^2.0.4",
+    "rand-token": "^1.0.1",
+    "sequelize": "^5.21.5",
+    "sequelize-cli": "^5.5.1",
+    "winston": "^3.3.3"
+  },
+  "devDependencies": {}
+}
