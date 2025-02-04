@@ -1,7 +1,7 @@
 import {  router , logger , authMiddleware , exec  } from '../utils/imports.js'
 import { commonModel } from '../model/model.imports.js'
 
-router.get('/addashboard' , authMiddleware , async(req , res) => {   
+router.get('/' ,  async(req , res) => {   
     let result , v_siteid
     try{
         const {userId : user_id , username , role : userrole} = req.session
