@@ -1,4 +1,4 @@
-import { mysql , dotenv ,util } from '../utils/imports.js'
+import { mysql , dotenv } from '../utils/imports.js'
 dotenv.config()
 
 // Implement the singleton here
