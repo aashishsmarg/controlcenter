@@ -4,7 +4,7 @@ dotenv.config()
 // Implement the singleton here
 class DBInstance{
     constructor(){
-        if(DBInstance.instance){
+        if(DBInstance){
             return DBInstance.instance
         }
         this.pool = mysql.createPool({
