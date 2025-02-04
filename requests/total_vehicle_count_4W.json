@@ -1,0 +1,59 @@
+{
+    "query": {
+        "bool": {
+            "must": [],
+            "filter": [
+                {
+                    "term": {
+                        "SiteId": "114"
+                    }
+                },
+                {
+                    "term": {
+                        "MainEntryCount": 1
+                    }
+                },
+                {
+                    "term": {
+                        "Direction.keyword": "IN"
+                    }
+                },
+                {
+                    "term": {
+                        "NotificationType": "12"
+                    }
+                },
+                {
+                    "range": {
+                        "DateTime": {
+                            "gte": "2021-11-21T09:00:00.000Z",
+                            "lte": "2021-11-22T03:00:59.999Z"
+                        }
+                    }
+                },
+                {
+                    "term": {
+                        "OwnerType": 3
+                    }
+                }
+            ]
+        }
+    },
+    "aggs": {
+        "ZoneDetails": {
+            "terms": {
+                "field": "Zone.keyword"
+            }
+        },
+         "VehicleType": {
+            "terms": {
+                "field": "VehicleType.keyword"
+            }
+        },
+        "TotalVehicleCount": {
+            "terms": {
+                "field": "MainEntryCount"
+            }
+        }
+    }
+  }

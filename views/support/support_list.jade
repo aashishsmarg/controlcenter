@@ -1,0 +1,135 @@
+doctype html
+html
+    head
+        include ../layout/common_css.jade
+
+
+
+    //- link(rel='stylesheet', href='/css/overview.css')
+    body.hold-transition.skin-blue.sidebar-mini
+        .wrapper
+            include ../layout/navigation.jade
+            include ../layout/sidebar.jade
+            .content-wrapper.contentwp.webScroll
+                section.content-header(class="dplnone")  
+                    h1 
+                        | Support List
+                section.content.contentcss.support-list
+                    .box.overview-table
+                        .box-header.with-border
+                            .row
+                                .col-sm-12.col-xs-12.txtcenter
+                                    div(class="abc")
+                                        h1()
+                                            | Support Tickets
+
+                        .box-body
+                        
+                                - if(messages.msg_info)
+                                    .alert.alert-success.alert-dismissable
+                                        button.close(type='button', data-dismiss='alert', aria-hidden='true')
+                                            | ×
+                                        h4
+                                            i.icon.fa.fa-check
+                                            | Success!
+                                        | !{messages.msg_info}
+                                - if(messages.msg_error)
+                                    .alert.alert-danger.alert-dismissable
+                                        button.close(type='button', data-dismiss='alert', aria-hidden='true')
+                                            | ×
+                                        h4
+                                            i.icon.fa.fa-ban
+                                            | Alert!
+                                        | !{messages.msg_error}
+                                table( id="example2" style="width:100%;table-layout:fixed;border-collapse:separate !important; line-height:24px; grid-template-areas: ' head-fixed' 'body-scrollable;" class="table table-bordered table-hover bodywrapcenter")
+                                    thead 
+                                        tr
+                                            th(style='width:6%' id="displaynone") S.No
+                                            th Name
+                                            th Site Name
+                                            th Priority
+                                            th Ticket Subject
+                                            th Status
+                                            th Resolved By
+                                            th Resolved Comments
+                                            th Action
+                                    tbody 
+                                        if messages.msg_error
+                                            | !{messages.msg_error}
+                                        else
+                                            for row, index in supportDetails 
+                                                tr(onclick="window.location='/support/details?ticketid=#{row.id}'")
+                                                    td(style='text-align:center')  #{index+1}
+                                                    td #{row.name}
+                                                    td #{row.site_name}
+                                                    td #{row.priority}
+                                                    td #{row.ticket_subject}
+                                                    td #{row.status}
+                                                    td #{row.resolved_by}
+                                                    td #{row.resolved_comments}
+                                                    - if (row.status == "Pending")
+                                                        td.action
+                                                            a(href="#{row.id}/#{row.ticket_subject}" onclick="event.stopPropagation();" class="resolve-btn") Resolve 
+                                                    - else
+                                                        td.action
+                                                            span( onclick="event.stopPropagation();") Already Resolved
+                                                    
+                                <div class="modal fade bd-example-modal-md" id="commentsModal" style="width:100%;height:auto;" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                                <div class="modal-dialog modal-dialog-overview" role="document">
+                                <div class="modal-content">
+                                <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                <h4 style="" class="modal-title" id="myModalLabel">Enter Resolved Comments</h4>
+                                </div>
+                                <div class="modal-body  d-flex align-items-center">
+                                form(action="/support/resolve", method="post" id="resolve_form") 
+                                    .row
+                                        .col-sm-3.col-xs-1
+                                        .col-sm-2.col-xs-5
+                                            label(for="") 
+                                                | Ticket Subject : 
+                                        .col-sm-4.col-xs-4
+                                            label(for="" id="modal-ticket-title") 
+                                            input(type="hidden" name="ticketid" id="resolve-ticket-id")
+                                            
+                                    .row.mt10
+                                        .col-sm-3.col-xs-1
+                                        .col-sm-2.col-xs-5
+                                            label(for="") 
+                                                | Resolved By : 
+                                        .col-sm-4.col-xs-4
+                                            label(for="") 
+                                                | #{username}
+                                            input(type="hidden" name="resolved_by" value="#{username}")
+                                    .row.mt10
+                                        .col-sm-3
+                                        .col-sm-2.mt10
+                                            label(for="") 
+                                                | Comments : 
+                                        .col-sm-4
+                                            input(type="text" id="" name="ticketcomments" class="form-control")
+
+                                    .row.mt10
+                                        .col-sm-3
+                                        .col-sm-2.mt10
+                                            label(for="") 
+                                                | Issue Related to : 
+                                        .col-sm-4
+                                            select(name="problemtitle" class="form-control dropdowncolor select2")
+                                                option(value="Server unreachable") Server unreachable
+                                                option(value="Unable to push data on server") Unable to push data on server
+                                                option(value="Service is woking fine but data unavailable ") Service is woking fine but data unavailable 
+                                                option(value="Coding Issue") Coding Issue
+                                    </div>
+                                    <div class="modal-footer">
+                                    <button type="submit" class="btn btn-success">Resolve</button>
+                                    <button type="button" class="btn btn-success" data-dismiss="modal">Close</button>
+                                    </div>
+                                    </div>
+                                    </div>
+                                    </div>
+                            
+            include ../layout/footer.jade
+            include ../layout/common_js.jade
+            script(type='text/javascript', src='/js/support.js')
+            script(type='text/javascript', src='/js/commonjs/site_date_filter.js')

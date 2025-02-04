@@ -1,0 +1,126 @@
+doctype html
+html
+    head
+        include ../layout/common_css.jade
+    //- link(rel='stylesheet', href='/css/support.css')
+    body.hold-transition.skin-blue.sidebar-mini.support-details
+        .wrapper
+            include ../layout/navigation.jade
+            include ../layout/sidebar.jade
+            .content-wrapper.contentwp.webScroll
+                section.content-header(class="dplnone")  
+                    h1 
+                        | Support
+                section.content.contentcss
+                    .box
+                        .box-header.with-border
+                            .row
+                                .col-sm-11.txtcenter
+                                    div(class="abc")
+                                        h1()
+                                            | Ticket Details
+                                .col-sm-1.txtcenter 
+                                    a(href="/support/list")
+                                        button().btn.btn-success
+                                            | Back
+                        .box-body
+                            - if(messages.msg_info)
+                                .alert.alert-success.alert-dismissable
+                                    button.close(type='button', data-dismiss='alert', aria-hidden='true')
+                                        | ×
+                                    h4
+                                        i.icon.fa.fa-check
+                                        | Success!
+                                    | !{messages.msg_info}
+                            - if(messages.msg_error)
+                                .alert.alert-danger.alert-dismissable
+                                    button.close(type='button', data-dismiss='alert', aria-hidden='true')
+                                        | ×
+                                    h4
+                                        i.icon.fa.fa-ban
+                                        | Alert!
+                                    | !{messages.msg_error}
+                            
+                            
+                            .row(class="mt10")
+                                .col-sm-1
+                                .col-sm-2
+                                    <label  class="control-label  site_label" >Name</label>
+                                .col-sm-3
+                                    input(type="text"  value="#{supportDetails.name}" class="form-control" readonly)
+                                .col-sm-1
+                                .col-sm-1
+                                    <label  class="control-label site_label" >Site</label>
+                                .col-sm-3
+                                    input(type="text"  value="#{supportDetails.site_name}" class="form-control" readonly)
+                                        
+                                
+
+                            .row(class="mt10")
+                                .col-sm-1
+                                .col-sm-2
+                                    <label  class="control-label site_label" >Priority</label>
+                                .col-sm-3
+                                    input(type="text"  value="#{supportDetails.priority}" class="form-control" readonly)
+
+                                .col-sm-1
+                                .col-sm-1
+                                    <label  class="control-label site_label" >Url</label>
+                                .col-sm-3
+                                    input(type="text"  value="#{supportDetails.ticket_url}" class="form-control" readonly)
+                                
+                            .row(class="mt10")
+                                .col-sm-1
+                                .col-sm-2
+                                    <label  class="control-label site_label" >Type</label>
+                                .col-sm-3
+                                    input(type="text"  value="#{supportDetails.support_type}" class="form-control" readonly)
+                                    
+                                .col-sm-1
+                                .col-sm-1
+                                    <label  class="control-label site_label" >Status</label>
+                                .col-sm-3
+                                    input(type="text"  value="#{supportDetails.status}" class="form-control" readonly)
+
+                            .row(class="mt10")
+                                .col-sm-1
+                                .col-sm-2
+                                    <label class="control-label site_label" >Subject</label>
+                                .col-sm-3
+                                    input(type="text"  value="#{supportDetails.ticket_subject}"  class="form-control" readonly)
+                                .col-sm-1
+
+                            .row(class="mt10")
+
+                                .col-sm-1
+                                .col-sm-2
+                                    <label  class="control-label site_label" >Description</label>
+                                .col-sm-8
+                                    textarea(name="description"  class="form-control" rows=2 cols=116 readonly)
+                                        | #{supportDetails.ticket_description}
+
+                            .row(class="mt10")
+                                .col-sm-1
+                                .col-sm-2
+                                    <label  class="control-label site_label" >Comments</label>
+                                .col-sm-8
+                                    textarea(name="description"  class="form-control" rows=2 cols=116 readonly)
+                                        | #{supportDetails.resolved_comments}
+
+                            .row(class="mt10")
+                                .col-sm-1
+                                .col-sm-2
+                                    <label  class="control-label site_label" >Ticket Attachment</label>
+                                .col-sm-7
+                                    #excelfilediv
+                                        a(href="/#{supportDetails.ticket_attachment}")
+                                            button.btn.btn-success 
+                                                | Download Excel file 
+                                    #imagefilediv
+                                        img( height="auto" width="50%" src="/#{supportDetails.ticket_attachment}", alt="", srcset="")
+                                        
+                                .col-sm-1
+            include ../layout/footer.jade
+            include ../layout/common_js.jade
+            script(type='text/javascript', src='/js/support.js')
+            script(type='text/javascript', src='/js/commonjs/site_date_filter.js')

@@ -1,0 +1,13 @@
+.ml0
+{
+	margin-left: 0px;
+}
+.cntheader
+{
+    padding-top: 15px;padding-bottom: 15px;background-color:#00a551;
+}
+
+.contdiv
+{
+    background-color:#eaeaeaf2;height: calc(100vh - 50px);overflow:auto;padding-left: 0px;padding-right: 0px;
+}

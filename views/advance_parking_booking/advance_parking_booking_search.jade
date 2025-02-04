@@ -1,0 +1,95 @@
+doctype html
+html
+	head
+		title
+			| ADVANCE PARKING SEARCH
+		meta(content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport')
+		link(rel='stylesheet', href='/adminlte/bootstrap/css/bootstrap.min.css')
+		link(rel='stylesheet', href='/font-awesome/css/font-awesome.css')
+		script(src="/advance_parking_booking_assets/js/jquery.min.js")
+		script(src="/advance_parking_booking_assets/js/popper.min.js")
+		script(src="/advance_parking_booking_assets/js/bootstrap.min.js")
+		link(rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css')
+		link(rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.css")
+		script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js")
+		script(src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js")
+		script(src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js")
+		script(src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js")
+		script(type="text/javascript",src="/advance_parking_booking_assets/js/advanceparkingbooking.js")
+
+		link(rel='stylesheet', href='/adminlte/plugins/iCheck/square/blue.css')
+		link(rel="shortcut icon" href="/images/SMARG_LOGO.png" type="image/png")
+		link(rel='stylesheet', href='/css/haeadercolor.css')
+		link(rel='stylesheet',href='/advance_parking_booking_assets/css/style.css')
+		
+	div
+
+		div(class="container mt-4")
+		
+			.row 
+				div(class="col-md-6 col-md-offset-3",id="searchform1")
+					img.img(src="/advance_parking_booking_assets/img/SMARG_LOGO.jpg" alt="top-logo")
+					h4(class="h4 headingtb") Advance Parking Booking
+					form(method="post" action="AdvanceBookingSearch/#{current_parking_name}/#{current_available_space}" id="search_form" autocomplete="off")
+						- if(messages.msg_error)
+							.alert.alert-danger.alert-dismissable
+								button.close(type='button', data-dismiss='alert', aria-hidden='true')
+									| ×
+								h4
+									i.icon.fa.fa-ban
+									| Alert!
+								| !{messages.msg_error}
+						
+						.form-group
+							label.lbl Search Previous Booking
+							div
+							input(type="text",value="",name="vehicle_number",class="input-feild",placeholder="Enter vehicle number",required)
+							&nbsp;
+							&nbsp;
+							&nbsp;
+							&nbsp;
+							button(type="submit",id="search_button") search
+							
+					
+				
+						.form-group
+							label.lbl Parking Site
+							input(type="text",value="#{parking_name}",name="parking_name",class="form-control",placeholder="Parking Site", readonly)
+						.form-group 
+							label.lbl Mobile Number
+							input(type="text",name="mobile_number",value="#{mobile_number}",class="form-control",placeholder="Enter Mobile Number",id="mobilenumber",onkeyup="mobilecheck()",readonly,required)
+							span(id="err1") 
+						.from-group 
+							label.lbl Vehicle Number
+							input(type="text",name="vehicle_number",value="#{vehicle_number}",class="form-control",placeholder="Enter Vehicle Number",id="vehiclenumber",readonly,onkeyup="vehiclenumber_check()",required)
+							span(id="err2") 
+						.from-group
+							label.lbl Parking Start Time
+							div
+								input(type="text",class="form-control",name="parking_starttime",value="#{parking_starttime}",readonly,required)
+								
+						.from-group
+							label.lbl Parking End Time
+							div
+								input(type="text",class="form-control",value="#{parking_endtime}",name="parking_endtime",readonly ,required)
+								
+						div.flexcontainer
+							label.lbl Parking Charges
+							div
+								input(type="text" class="inputFielde" id="parkingAmt",name="parking_charges",value="#{parking_charges}" readonly)
+						br
+						
+						CENTER 
+							a(href="/SmartParking/AdvanceBooking?parkingname=#{current_parking_name}&availablespace=#{current_available_space}",class="backtobooking") Click Here To Book Parking
+					
+						
+						br 
+						br
+						.form-group 
+			
+							div(class="powered_by text-center")
+								p(class="mb-0") Powered by Smarg #{current_parking_site}
+								a(class="mb-0",href="https://www.smargtech.com") www.smargtech.com
+							div(class="copy_rights text-center")
+								p(class="mb-0")
+								small ©2024 Smarg Technologies Pvt. Ltd. All rights reserved

@@ -1,0 +1,18 @@
+body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: #00B7FF;
+}
+.skin-blue .main-header .navbar {
+  background-color: #00a551;
+}
+
+
+.skin-blue .main-header .logo {
+background-color: #007e3b;
+color: #fff;
+border-bottom: 0 solid transparent;
+}

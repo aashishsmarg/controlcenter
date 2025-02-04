@@ -1,0 +1,45 @@
+/* Header  */
+
+.logomini_img
+{
+    background-color:var(--othercolor12);
+    padding:0px;
+    width:50px;
+    height:53px;
+    margin-left: -2px;
+}
+
+.logoweb
+{
+    background-color: var(--othercolor2);
+}
+
+.spanlogo
+{
+    background-color:var(--othercolor2);
+}
+
+.contcent_txt
+{
+    margin-left: 10px;
+}
+
+.username
+{
+    padding-right: 10px;
+    padding-left: 10px;
+}
+
+.seperator
+{
+    padding-right: 8px;
+    padding-left: 8px;
+}
+
+
+/* Sidebar  */
+
+.menucss
+{
+    margin-left: 35px; color:white;
+}

@@ -1,0 +1,24 @@
+.dplnone 
+{
+  display:none
+}
+.colmddiv 
+{
+display:inline-block 
+}
+.boxbdydiv
+{
+    text-align:center; padding-bottom:20px;
+}
+.boxbdydiv>.imageSetting
+{
+    background-color:var(--othercolor2);
+}
+.btn-success.focus, .btn-success:focus , .btn-success:active:focus ,.btn-success , .btn-success:active {
+  color: #fff;
+  background-color:var(--primarycolor) !important;
+  border-color: var(--primarycolor);
+}
+.form-control:focus{
+  border-color: var(--primarycolor) !important;
+}

@@ -1,0 +1,126 @@
+aside.main-sidebar
+	<div class="overlay dplnone" id="sidebarspinner"></div>
+	section.sidebar
+		<ul class="sidebar-menu" data-widget="tree">
+		<li>
+		<a href="/dashboard">
+		<i class="fa fa-dashboard"></i> <span>Dashboard</span>
+		<span class="pull-right-container">
+		</span>
+		</a>
+		</li>
+		<li>
+		<a href="/overview" >
+		<i class="fa fa-eye" aria-hidden="true"></i><span>Overview</span>
+		<span class="pull-right-container">
+		</span>
+		</a>
+		</li>		
+		<li class="treeview">
+		<a href="#">
+		<i class="fa fa-pie-chart"></i>
+		<span>Retail Analytics</span>
+		<span class="pull-left-container">
+		<i class="fa fa-angle-right pull-right"></i>
+		</span>
+		</a>
+		<ul class="treeview-menu">
+		<li><a class="active menucss" href="/footfalltrend ">Footfall Trends</a></li>
+		<li><a class="active menucss" href="/footfalldistribution ">Footfall Distribution</a></li>
+		</ul>
+		</li>
+		<li class="treeview">
+		<a href="#">
+		<i class="fa fa-calendar"></i>
+		<span>Events</span>
+		<span class="pull-left-container">
+		<i class="fa fa-angle-right pull-right"></i>
+		</span>
+		</a>
+		<ul class="treeview-menu">
+		<li><a class="active menucss" href="/tractionanalysis ">Traction Analytics</a></li>
+		</ul>
+		</li>
+		if(userrole == 'Smarg_Admin')		
+			<li class="treeview">
+			<a href="#">
+			<i class="fa fa-television"></i>
+			<span>Smart Advertising</span>
+			<span class="pull-left-container">
+			<i class="fa fa-angle-right pull-right"></i>
+			</span>
+			</a>
+			<ul class="treeview-menu">
+			<li><a class="active menucss" href="/addashboard">Ad Dashboard</a></li>
+			<li><a class="active menucss" href="/screentrends">Screen Trends</a></li>
+			<li><a class="active menucss" href="/offeranalytics">Offer Trends</a></li>
+			</ul>
+			</li>
+		<li class="treeview">
+		<a href="#">
+		<i class="fa fa-shield"></i>
+		<span>Violation</span>
+		<span class="pull-left-container">
+		<i class="fa fa-angle-right pull-right"></i>
+		</span>
+		</a>
+		<ul class="treeview-menu">
+		<li><a class="active menucss" href="/violationtrend">Violation Trends</a></li>
+		<li><a class="active menucss" href="/violations">Violation</a></li>
+		</ul>
+		</li>
+		if(userrole == 'Smarg_Admin')		
+			<li class="treeview">
+			<a href="#">
+			<i class="fa fa-pie-chart"></i>
+			<span>Queue Management</span>
+			<span class="pull-left-container">
+			<i class="fa fa-angle-right pull-right"></i>
+			</span>
+			</a>
+			<ul class="treeview-menu">
+			<li><a class="active menucss" href="/queueanalytics">Queue Analytics</a></li>
+			</ul>
+			</li>	
+		if(userrole != 'Smarg_Admin' || userrole == 'Smarg_Admin')		
+			<li class="treeview">
+			<a href="#">
+			<i class="fa fa-car"></i>
+			<span>Smart Parking</span>
+			<span class="pull-left-container">
+			<i class="fa fa-angle-right pull-right"></i>
+			</span>
+			</a>
+			<ul class="treeview-menu">
+			<li><a class="active menucss" href="/vehicleanalytics">Vehicle Trends</a></li>
+			<li><a class="active menucss" href="/vehiclelistanpr">Parked Vehicles</a></li>		
+			</ul>
+			</li>			
+		if(userrole == 'Smarg_Admin')		
+			<li>
+			<a href="/monitoring">
+			<i class="fa fa-line-chart"></i> <span>System Health</span>
+			<span class="pull-right-container">
+			</span>
+			</a>
+			</li>
+		<li>
+		<a href="/support" >
+		<i class="fa fa-phone" aria-hidden="true"></i><span>Support</span>
+		<span class="pull-right-container">
+		</span>
+		</a>
+		</li>
+		if(userrole == 'Smarg_Admin')		
+			<li>
+			<a href="/support/list">
+			<i class="fa fa-ticket"></i> <span>Support List</span>
+			<span class="pull-right-container">
+			</span>
+			</a>
+			</li>
+
+
+
+
+

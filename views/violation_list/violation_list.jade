@@ -1,0 +1,360 @@
+doctype html
+html
+	head
+		include ../layout/common_css.jade
+		link(rel='stylesheet', href='/css/violationlist.css')
+	body.hold-transition.skin-blue.sidebar-mini
+		.wrapper
+			include ../layout/navigation.jade
+			include ../layout/sidebar.jade
+			.content-wrapper.contentwp.webScroll
+				section.content-header(class="dplnone")  
+					h1 
+						| Violations
+				section.content.contentcss
+					.box
+						<div class="overlay dplnone" id="loadingscrollervioltn">
+						<div class="loader">Loading...</div>
+						</div>
+						.box-header.with-border
+							.row
+								<label  class="col-sm-1 control-label site_label" >Site</label>		
+								td
+								div(class="colmddiv btn-violation")
+								<a href="#mymodelpopup" data-toggle="modal"><button type="button" class="btn btn-success greport">Generate Report</button></a>
+								<div class="modal fade" id="mymodelpopup" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+								<div class="modal-dialog" role="document">
+								<div class="modal-content">
+								<div class="modal-header mdheader">
+								<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+								<span class="modal-title" id="mymodelpopup">Violations Report</span>
+								</div>
+								<div class="modal-body">
+								<div class="form-group mbdy_fromgrp">
+								<div class="col-sm-2 numbs">
+								<label for="team_name-inline mfrmlabel_cal">From</label>
+								</div>
+								<div class="col-sm-4">
+								<div class="input-group date">
+								<div class="input-group-addon">
+								<i class="fa fa-calendar"></i>
+								</div>
+								<input type="text" class="form-control pull-right" id="datepicker1">
+								</div>
+								</div>
+								<div class="col-sm-2 numbs">
+								<label for="team_name-inline mtolabel_cal">To</label>
+								</div>
+								<div class="col-sm-4">
+								<div class="input-group date">
+								<div class="input-group-addon">
+								<i class="fa fa-calendar"></i>
+								</div>
+								<input type="text" class="form-control pull-right" id="datepicker2">
+								</div>
+								</div>
+								</form>
+								</div>
+								<div class="pdf grpreport" id="report" >
+								<div  class="dplnone">
+								<input type="radio" id="ritemb" name="optradio" value="0" checked>
+								<label for="ritemb">XLS Report</label>
+								</div>
+								</div>
+								</div>
+								<div class="modal-footer">
+								<button type='submit' class="btn btn-success" onclick="download_violation_list_report('#{sccauth_token},#{v_siteid}')">Download Report</button>
+								<button type="button" class="btn btn-success" id='close-button' data-dismiss="modal">Close</button></div>
+								</div>
+								</div>
+								</div>	
+								.col-sm-3.site-violation
+									div
+										select(name='sitefilterviolation' class="sitefilterviolation dropdowncolor").form-control.select2
+											each datasite in datas								
+												option(value="#{datasite.site_id}" selected = ( "#{datasite.site_id}" === "#{v_siteid}")) 
+													| #{datasite.site_name}
+							.row(class="mtm34")
+								td
+								div(class="colmddiv")
+								<div class="modal fade" id="waitmodel" tabindex="-1" role="dialog" aria-labelledby="waitmodel">
+								<div class="modal-dialog" role="document">
+								<div class="modal-content">
+								<div class="modal-header mdheader">
+								<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+								<span class="modal-title" id="waitmodel">Violations Report</span>
+								</div>
+								<div class="modal-body">
+								<div class="form-group mbdy_fromgrp" >
+								<div class="row-sm-2 numbs">
+								<p class="genrep_btn">Generating Report</p>
+								</div>
+								</form>
+								</div>
+								<div class="modal-footer">
+								<button type="button" class="btn btn-success" id='close-button' data-dismiss="modal">Close</button></div>
+								</div>
+								</div>
+								</div>						
+							.row(class="mtm34")
+								td
+								div(class="colmddiv")
+								<div class="modal fade" id="alertwarn" tabindex="-1" role="dialog" aria-labelledby="alertwarn">
+								<div class="modal-dialog" role="document">
+								<div class="modal-content">
+								<div class="modal-header mdheader">
+								<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+								<span class="modal-title" id="alertwarn">Violations Report</span>
+								</div>
+								<div class="modal-body">
+								<div class="form-group mbdy_fromgrp" >
+								<div class="row-sm-2 numbs">
+								<p class="md_errmsg">There is some server error</p>
+								</div>
+								</form>
+								</div>
+								<div class="modal-footer">
+								<button type="button" class="btn btn-success" id='close-button' data-dismiss="modal">Close</button></div>
+								</div>
+								</div>
+								</div>									
+						.box-body
+							- if(messages.msg_info)
+								.alert.alert-success.alert-dismissable
+									button.close(type='button', data-dismiss='alert', aria-hidden='true')
+										| ×
+									h4
+										i.icon.fa.fa-check
+										| Success!
+									| !{messages.msg_info}
+							- if(messages.msg_error)
+								.alert.alert-danger.alert-dismissable
+									button.close(type='button', data-dismiss='alert', aria-hidden='true')
+										| ×
+									h4
+										i.icon.fa.fa-ban
+										| Alert!
+									| !{messages.msg_error}
+							<div class="vehscroll">						
+							table(id="example8" class="table table-bordered table-hover" style="margin-top: 25px;")
+								thead
+									tr
+										th S.No.
+										th Image
+										if (is_incident_video_enable)
+											th Video
+										th Violation Type
+										th Date							
+										th Zone
+										th Status
+										th Updated By
+										th Description
+										th is Resolved
+								tbody
+									if messages.msg_error
+										| !{messages.msg_error}
+									else
+										for row, index in data 
+											tr(id = "abcdefg")
+												td #{index+1}
+												td(href="#myModalpopup" class="width200p" id = "ntfctioncolumndata" data-toggle="modal" data-book-id="#{row.id}" )
+													if(row.image_url_1 != '')
+														<img src = "https://smargtechnologies.in:3015/surveillance/#{row.image_url_1}" alt = '' class="violimg1" />
+													if(row.image_url_2 != '')
+														<img src ="https://smargtechnologies.in:3015/surveillance/#{row.image_url_2}" alt = ''  class="violimg2" />
+												if (is_incident_video_enable)
+													td(href="#myModalpopupvideo" class="width200p showvideomodal" data-toggle="modal" data-book-id="https://smargtechnologies.in:3015/surveillance/#{row.video_url}" )
+														video(height="80px" width="128px" src="https://smargtechnologies.in:3015/surveillance/#{row.video_url}") 
+												
+												td #{row.notification_typename}										
+												td #{row.create_date}	
+												td #{row.cameraname} 
+												td #{row.statusname}
+												td #{row.resolvedBy}
+												td #{row.discription}
+												td(class="width150p")
+													div( class="tooltips colmddiv")
+														a(href="#my_modal" data-toggle="modal" data-book-id="#{row.id}").btn.btn-sm
+															i.fa.fa-check(class="resi")
+																<span class="tooltiptexts">Resolved</span>
+													| 
+													div( class="tooltips colmddiv")
+														a(href="#my_modal_reject" data-toggle="modal" data-book-id="#{row.id}").btn.btn-sm
+															i.fa.fa-remove(class="reji")
+																<span class="tooltiptexts">Rejected</span>												
+													//- |
+													if (isadmin === true)
+														div(class="tooltips colmddiv")
+															a(href="#delete-model" data-toggle="modal" data-delete-id="#{row.id}").btn.btn-sm
+																i.fa.fa-trash(class="reji")
+																	<span class="tooltiptexts">Delete</span>
+													else
+														div(class="tooltips dplnone" )
+															a(href="#delete-model" data-toggle="modal" data-delete-id="#{row.id}").btn.btn-sm
+																i.fa.fa-trash(class="reji")
+																	<span class="tooltiptexts">Delete</span>												
+													<form role='form',method='post' action='/violations/delete/'>											
+													<div class="modal fade" id="delete-model" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+													<div class="modal-dialog" role="document">
+													<div class="modal-content">
+													<div class="modal-header popupheader">
+													<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+													<span class="modal-title" id="myModalLabel"></span>
+													</div>
+													<div class="modal-body">
+													<div class="form-group">
+													<h4 class="modal-title" id="myModalLabel">Are you sure you want to delete this violation?</h4>
+													<input type="text" class="dplnone" name="delid" value=""/>
+													<input type="text" class="dplnone" name="siteidres" value="#{v_siteid}"/>
+													</div>
+													</div>											
+													<div class="modal-footer">
+													<button type='submit' class="btn btn-success">Yes</button>											
+													<button type="button" class="btn btn-success" data-dismiss="modal">No</button>
+													</div>
+													</div>
+													</div>
+													</div>
+													</form>			
+													<div class="modal fade" id="myModalpopup" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+													<div class="modal-dialog" role="document">
+													<div class="modal-content">
+													<div class="modal-header">
+													<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+													<h4 class="modal-title" id="myModalLabel">Violation Image</h4>
+													</div>
+													<div class="modal-body">
+													<img alt = '' id = "violationimage1" class="violationimg" />
+													<img  alt = '' id = "violationimage2" class="violationimg"/>
+													</div>
+													<div class="modal-footer">
+													<button type="button" class="btn btn-success" data-dismiss="modal">Close</button>
+													//- <button type="button" class="btn btn-primary">Save changes</button>
+													</div>
+													</div>
+													</div>
+													</div>	
+													//- video modal
+													<div class="modal fade" id="myModalpopupvideo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+													<div class="modal-dialog" role="document">
+													<div class="modal-content">
+													<div class="modal-header">
+													<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+													<h4 class="modal-title" id="myModalLabel">Video</h4>
+													</div>
+													<div class="modal-body">
+													//- <video src="https://sample-videos.com/video321/mp4/720/big_buck_bunny_720p_1mb.mp4" controls autoplay height="350px" width="350px"></video>
+													video(id="modalvideotag"  autoplay) 
+													</div>
+													<div class="modal-footer">
+													<button type="button" class="btn btn-success" data-dismiss="modal">Close</button>
+													//- <button type="button" class="btn btn-primary">Save changes</button>
+													</div>
+													</div>
+													</div>
+													</div>	
+													<form role='form',method='post' action='/violations/addres'>											
+													<div class="modal fade" id="my_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+													<div class="modal-dialog" role="document">
+													<div class="modal-content">
+													<div class="modal-header popupheader" style = "text-align : center; font-size:16px;font-weight:600;">
+													//- <span  class = "spanmodal" ><img  src="/images/Login_Logo120x24.png" alt="logo" style="background-color:white "/></span>
+													<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+													<span class="modal-title"  id="myModalLabel">Resolve Violation </span>
+													</div>
+													<div class="modal-body">
+													<div class="form-group">
+													<label for="recipient-name"style = "padding-top : 10px;"  class="col-form-label">Comments:</label>
+													<input type="text" class="form-control" id="comments" name = "comments">
+													<input type="text" class="dplnone" name="resid" value=""/>
+													<input type="text" class="dplnone" name="siteidres" value="#{v_siteid}"/>
+													</div>
+													</div>
+													<div class="modal-footer">
+													<button type='submit' class="btn btn-success">Save</button>
+													<button type="button" class="btn btn-success" data-dismiss="modal">Close</button>
+													</div>
+													</div>
+													</div>
+													</div>
+													</form>
+													<form role='form',method='post' action='/violations/addrej'>											
+													<div class="modal fade" id="my_modal_reject" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+													<div class="modal-dialog" role="document">
+													<div class="modal-content">
+													<div class="modal-header popupheader" style = "text-align : center; font-size:16px;font-weight:600;">
+													<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+													<span class="modal-title" id="myModalLabel">Reject Violation</span>
+													</div>
+													<div class="modal-body">
+													<div class="form-group">
+													<label for="recipient-name" class="col-form-label pt10">Comments: </label>
+													<input type="text" class="form-control" id="commentsrej" name = "comments">
+													<input type="text" class="dplnone" name="rejid" value=""/>
+													<input type="text" class="dplnone" name="siteidres" value="#{v_siteid}"/>
+													</div>
+													</div>
+													<div class="modal-footer">
+													<button type='submit' class="btn btn-success">Save</button>
+													<button type="button" class="btn btn-success" data-dismiss="modal">Close</button>											</div>
+													</div>
+													</div>
+													</div>
+													</form>
+						div(class="txtcenter")
+							if pageCount > 1
+								ul.pagination
+									if (currentPage == 1)
+										li(class="disabled")
+											a() &laquo; First
+									if currentPage > 1
+										li
+											a(href='/violations/data/#{v_siteid}/?page=1')  &laquo; First
+									- var y = parseInt(currentPage)-1
+									- var z = parseInt(currentPage)+1
+									if currentPage > 1
+										li
+											a(href="/violations/data/#{v_siteid}/?page="+y)  &#8249;							
+									- var x = 1	
+									if currentPage > x
+										- x = x + (currentPage -1)
+									if currentPage >= (pageCount-4)
+										if	x >	1	
+											- x = pageCount-1	
+										if	x >	2	
+											- x = pageCount-2
+										if	x >	3	
+											- x = pageCount-3
+										if x > 4
+											- x = pageCount-4											
+									if (x !== 1)
+										li.disabled
+											//- a(href='#') ...
+									- for (x; x <= pageCount; x++)
+										if( currentPage == x)
+											li.active
+												span.sr_only
+													= currentPage
+										else
+											li
+												a(href= "/violations/data/#{v_siteid}/?page="+x )
+													= x
+										if x == (z+3)
+											li.disabled
+												//- a(href="#") ...
+												- break
+									if currentPage != pageCount
+										li
+											a(href= href="/violations/data/#{v_siteid}/?page="+z) &#8250;								
+									if currentPage != pageCount
+										li
+											a(href= "/violations/data/#{v_siteid}/?page=#{Math.floor(pageCount)}" ) Last &raquo;
+									if (currentPage == pageCount)
+										li(class="disabled")
+											a() Last &raquo;							
+			include ../layout/footer.jade
+			include ../layout/common_js.jade
+			//- script(type='text/javascript', src='/js/commonjs/site_date_filter.js')
+			script(type='text/javascript', src='/js/violation_list.js')
+			//- script(type='text/javascript', src='/js/timefilter.js')
+						

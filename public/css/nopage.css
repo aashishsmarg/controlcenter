@@ -1,0 +1,19 @@
+.contentnpage
+{
+    height:100%;
+}
+.containernopage
+{
+    text-align:center;
+}
+
+.npagediv1
+{
+    color: var(--othercolor1); font-size:36px;
+}
+
+.npagediv2
+{
+    color:var(--othercolor1); font-size:26px;
+}
+

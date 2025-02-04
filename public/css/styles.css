@@ -1,0 +1,309 @@
+
+
+/* common */
+
+.dplnone /*dashboard, overview, Footfall trends, Violation Trends, Vehicle Analytics, Traction Analytics, Ad Dashboard, Screen Trends, Offer Trends, Moitoring, Parked Vehicle, Navigation*/
+{
+  display:none
+}
+.colmddiv /*dashboard, Footfall Trends, Violation Trends, Vehicle Analytics , Traction Analytics, Ad Dashboard, Screen Trends, Offer Trends, Parked Vehicle*/
+{
+display:inline-block /*dashboard*/
+}
+
+
+.timeflt_label /*dashboard, Footfall Trends, Violation Trends, Vehicle Analytics, Traction Analytics, Ad Dashboard, Screen Trends, Offer Trends*/
+{
+  margin-bottom: 0px;margin-top: 5px; font-size:16px;width:77px; 
+}
+
+.site_label /*dashboard, Footfall Trends, Violation Trends, Vehicle Analytics, Traction Analytics, Ad Dashboard, Screen Trends, Offer Trends*/
+{
+  margin-bottom: 0px;margin-top: 5px; font-size:16px;width:50px;
+  padding-right: 0px;
+
+}
+
+.vehicleType_label /*dashboard, Footfall Trends, Violation Trends, Vehicle Analytics, Traction Analytics, Ad Dashboard, Screen Trends, Offer Trends*/
+{
+  margin-bottom: 0px;margin-top: 5px; font-size:16px;width:120px; 
+}
+
+
+
+/* Dashboard */
+
+
+
+
+.mdheader /*dashboard, overview, Footfall trends, Violation Trends, Vehicle Analytics,  Traction Analytics, Ad Dashboard, Screen Trends, Offer Trends, Moitoring, Parked Vehicle*/
+{
+  background:rgba(var(--othercolor3_rgb), 0.949)  !important;text-align: center;font-size: 16px; font-weight: 600;
+}
+
+.mbdy_fromgrp /*dashboard, overview, Footfall trends, Violation Trends, Vehicle Analytics,  Traction Analytics, Ad Dashboard, Screen Trends, Offer Trends, Moitoring, Parked Vehicle*/
+{
+  margin-top:20px;
+}
+
+
+.mfrmlabel_cal /* Dashboard, footfall Trends, Violation Trends, Vehicle Analytics, Traction Analytics, Ad Dashboard, Screen Trends, Offer Trends, Moitoring, Parked Vehicle */
+{
+  margin-left:0px;margin-top:7px
+}
+.mtolabel_cal /* Dashboard, footfall Trends , Violation Trends, Vehicle Analytics, Traction Analytics, Ad Dashboard, Screen Trends, Offer Trends, Moitoring, Parked Vehicle*/
+{
+  margin-left:12px;margin-top:7px
+}
+
+.md_errmsg /*Footfall Trends, Violation Trends, Vehicle Analytics, Traction Analytics, Ad Dashboard, Screen Trends, Offer Trends, Parked Vehicle */
+{
+  margin-top:7px;text-align: center;
+}
+
+.genrep_btn /*Footfall Trends, Violation Trends, Event Traction, Parked Vehicle */
+{ 
+  text-align: center;margin-top:7px
+}
+
+#dashboarddata
+{
+  margin-top:8px;
+}
+
+.frmdiv/*dashboard,Footfall Trends, Violation Trends */
+{
+  display:none;
+  width: 240px;
+}
+.todiv /*dashboard,Footfall Trends, Violation Trends */
+{
+  display:none;width: auto;
+  width: 240px;
+}
+.frm_text  /*dashboard,Footfall Trends, Violation Trends */
+{
+  float: left;margin-top:8px;font-size:14px; width: 50px;
+}
+.frm_label  /*dashboard,Footfall Trends, Violation Trends */
+{
+  float: left;margin-top:8px;font-size:14px;margin-left:3px;font-weight:normal !important; width: 144px;
+}
+.to_label   /*dashboard,Footfall Trends, Violation Trends */
+{
+  width: 30px; margin-top:8px;position:relative; font-size:14px;margin-left:3px;font-weight:normal !important; width: 144px;
+}
+.to_text   /*dashboard,Footfall Trends, Violation Trends */
+{
+  margin-top:8px;position:relative;font-size:14px; width: 35px;
+}
+.grpreport  /*dashboard footfall  trends, Violation Trends, Traction Analysis */
+{
+  margin-top: 10px;
+}
+.dsh_grp
+{
+  margin-top: 8px;
+}
+
+/* Overview */
+
+
+/* Footfall trends */
+
+.supemaildiv
+{
+  position:absolute;top:10px;right:50%;visibility:hidden; display: hidden;
+}
+.suptext
+{
+  color: var(--othercolor11) ;font-size:14px;width:3.75%;
+}
+
+/* Violation Trends */
+
+
+
+/* Events Trends */
+
+
+.pt5
+{
+  padding-top:5px;
+}
+
+.esite_label 
+{
+  padding-left: 0px;
+}
+
+
+
+@media only screen and (min-width:768px){
+  .sitedpcol{
+    padding-left: 0px;width:20%;
+  }
+  .evdpcol{
+    padding-left: 0px;padding-right: 0px;width:20%;
+  
+  }
+  .event_label 
+{
+  margin-bottom: 0px;margin-top: 5px; font-size:16px;width:55px;padding-left: 0px;padding-right: 10px;
+  padding-right: 15px;
+}
+}
+
+@media (max-width:768px){
+  .btn-parked{
+    padding-top: 10px;
+  }
+
+}
+
+#example4_wrapper .dataTables_scrollHead
+{
+  
+  
+  /* overflow-x: auto important; */
+padding-top: 15px;
+}
+
+@media only screen and (max-width:500px){
+  .btn-violation{
+    width: 116px
+  }
+}
+
+@media only screen and (max-width:500px){
+  .site-violation{
+    margin-top: 10px;
+  }
+}
+@media only screen and (max-width:768px){
+  .search-parked{
+    padding-left: 132px;
+    margin-top: -34px;
+  }
+}
+
+@media only screen and (min-width:768px){
+  .search-parked-web{
+    width: 184px;
+  }
+  .box-inp{
+    width:100%;
+  }
+}
+  
+
+
+/* .event_label
+{
+  font-size:16px;
+  padding-right: 13px;
+} */
+
+
+.egrpreport
+{
+  padding-top: 5px;padding-bottom: 5px;
+}
+
+.trackingbtn
+{
+  padding-top: 5px;padding-bottom: 5px;
+}
+
+.eventgrhdiv
+{
+  height: 72vh;
+}
+
+/* A Dashboard */
+.cntheight
+{
+  height: 89%;
+}
+.ifrdiv
+{
+  height: 70vh;
+}
+
+/* Parked Vehicle */
+.paginationdiv
+{
+  text-align : center;
+}
+.greport
+{
+  margin-left:30px;
+
+}
+
+.mdpopupdiv
+{
+  padding-top: 0px;padding-right: 15px;float: right;
+  width: auto;
+}
+
+.searchspan
+{
+  margin-top:5px;
+}
+#txt-searchapnr{
+  font-weight: normal;
+}
+
+/* violation list  */
+/* .mtm34
+{
+  margin-top: -34px;
+} */
+.txtcenter
+{
+  text-align : center;
+}
+.width200p
+{
+  width: 200px;
+}
+
+.width150p
+{
+  width: 150px;
+}
+.resi
+{
+  font-size:20px;color: var(--othercolor12);
+}
+
+.reji
+{
+  font-size:20px;color:var(--othercolor10);
+}
+
+.violimg1
+{
+  width:90px;height:auto;
+}
+.violimg2
+{
+  width:90px;height:auto;margin-left: 5px;
+}
+.pt10
+{
+  padding-top : 10px;
+}
+.violationimg
+{
+height: auto;
+width: 100%;
+}
+
+#modalvideotag{
+	height:auto;
+	width:100%;
+}
+
+

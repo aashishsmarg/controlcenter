@@ -1,0 +1,63 @@
+{
+    "query": {
+        "bool": {
+            "must": [],
+            "filter": [
+                {
+                    "term": {
+                        "SiteId": "114"
+                    }
+                },
+                {
+                    "term": {
+                        "MainEntryCount": 1
+                    }
+                },
+                {
+                    "term": {
+                        "Direction.keyword": "IN"
+                    }
+                },
+                {
+                    "term": {
+                        "NotificationType": "24"
+                    }
+                },
+                {
+                    "range": {
+                        "DateTime": {
+                            "gte": "2021-11-21T09:00:00.000Z",
+                            "lte": "2021-11-22T03:00:59.999Z"
+                        }
+                    }
+                }
+            ]
+        }
+    },
+    "aggs": {
+        "ZoneDetails_Hourly_Count": {
+            "terms": {
+                "field": "Zone.keyword"
+            },
+            "aggs": {
+                "HoulyCount": {
+                    "date_histogram": {
+                        "field": "DateTime",
+                        "interval": "hour",
+                        "format": "yyyy-MM-dd HH:mm:ss"
+                    }
+                }
+            }
+        },
+        "ZoneDetails": {
+            "terms": {
+                "field": "Zone.keyword"
+            }
+        },
+        "TotalVehicleCount": {
+            "terms": {
+                "field": "MainEntryCount"
+            }
+        }
+    }
+  }

@@ -1,0 +1,51 @@
+{
+    "query": {
+        "bool": {
+            "must": [],
+           
+            "filter": [
+                 {
+                    "bool": {
+                        "should": [
+                            {
+                                "term": {
+                                    "camera_status.keyword": "unreachable"
+                                }
+                            },
+                            {
+                                "term": {
+                                    "is_resolution_change": true
+                                }
+                            }
+                        ]
+                    }
+                },
+                {
+                    "term": {
+                        "SiteId": 117
+                    }
+                },
+                {
+                    "term": {
+                        "log_type.keyword": "CAMERA_HEALTH"
+                    }
+                },
+                {
+                    "range": {
+                        "DateTime": {
+                            "gte": "2022-04-01T10:00:00.000Z",
+                            "lte": "2022-04-17T01:00:00.999Z"
+                        }
+                    }
+                }
+            ]
+        }
+    },
+    "_source": [
+        "DateTime",
+        "camera_name",
+        "resolution",
+        "is_resolution_change",
+        "camera_status"
+    ]
+}

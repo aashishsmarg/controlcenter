@@ -1,0 +1,74 @@
+doctype html
+html
+	head
+		title
+			| #{title}
+		meta(content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport')
+		link(rel='stylesheet', href='/adminlte/bootstrap/css/bootstrap.min.css')
+		link(rel='stylesheet', href='/font-awesome/css/font-awesome.css')
+		link(rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css')
+		link(rel='stylesheet', href='/adminlte/dist/css/AdminLTE.min.css')
+		link(rel='stylesheet', href='/adminlte/plugins/iCheck/square/blue.css')
+		link(rel="shortcut icon" href="/images/SMARG_LOGO.png" type="image/png")
+		link(rel='stylesheet', href='/css/branding.css')
+		link(rel='stylesheet', href='/css/haeadercolor.css')
+		link(rel='stylesheet', href='/css/login.css')
+
+	body.hold-transition.login-page
+		.login-box
+			.login-logo
+				a(href='#')
+					b
+					| 
+			.login-box-body
+				div(class="boxbdydiv")
+					img(classname='imageSetting', src='/images/Login_Logo120x24.png', alt='logo') 
+				p.login-box-msg
+					| 
+				form(action="/login/",method="post",id="login_form")
+					- if (messages.msg_error) 
+						.alert.alert-danger.alert-dismissable 
+							button.close(type='button', data-dismiss='alert', aria-hidden='true') 
+								| ×
+							h4
+								i.icon.fa.fa-ban
+								| Alert! 
+							| !{messages.msg_error}
+					.form-group.has-feedback
+						input(type="text",placeholder="Email",name="username",id="username").form-control
+						input(type="hidden",name="#{username}" id="cookie_username").form-control
+						span.glyphicon.glyphicon-envelope.form-control-feedback
+					.form-group.has-feedback
+						input(type="password",placeholder="Password",name="txtPassword" id ="password" value="").form-control
+						input(type="hidden",name="#{password}" id ="cookie_password").form-control
+						span.glyphicon.glyphicon-lock.form-control-feedback
+						input(type="text" class="dplnone" name="authtoken" id ="autht" value="abc")
+						input(type="text" class="dplnone" name="userid" value="")
+						input(type="text" class="dplnone" name="deviceToken" id="deviceToken")
+					.row
+						.col-xs-8
+							//- .form-group.has-feedback.checkbox.icheck
+							.form-group.has-feedback
+								label
+									input(type="checkbox", name="checked", id="remember_me", class="")
+									|  Remember Me
+
+									//- input(type="checkbox"  name="checked" id="remember_me").form-control 
+						.col-xs-4
+							button(type="button" id="signin-btn").btn.btn-success.btn-block.btn-flat
+								| Sign In
+				a(href='#')
+					| 
+				br
+				a(href='#').text-center
+					|	
+script(type='text/javascript', src='/adminlte/plugins/jQuery/jquery-2.2.3.min.js')
+script(type='text/javascript', src='/adminlte/bootstrap/js/bootstrap.min.js')
+script(type='text/javascript', src='/adminlte/plugins/iCheck/icheck.min.js')
+script(type='module', src='/js/login.js')
+//- script(type='module', src='/js/commonjs/pushNotification.js')
+//- script(src="https://www.gstatic.com/firebasejs/7.8.2/firebase-app.js")
+//- script(src="https://www.gstatic.com/firebasejs/7.8.2/firebase-messaging.js")
+
+//- script(type='text/javascript', src='/js/firebase-init.js')
+

@@ -1,0 +1,41 @@
+{
+  "name": "smarg_surveillance",
+  "version": "1.7.0",
+  "description": "smarg_surveillance",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "smarg_surveillance",
+  "license": "ISC",
+  "dependencies": {
+    "async": "^3.2.6",
+    "axios": "^1.7.7",
+    "bcrypt": "^5.1.1",
+    "child-process": "^1.0.2",
+    "connect-flash": "^0.1.1",
+    "cookie-parser": "^1.4.7",
+    "cors": "^2.8.5",
+    "crypto": "^1.0.1",
+    "dotenv": "^16.4.5",
+    "express": "^4.21.0",
+    "express-fileupload": "^1.5.1",
+    "express-rate-limit": "^7.4.1",
+    "express-session": "^1.18.1",
+    "express-validator": "^7.2.0",
+    "helmet": "^8.0.0",
+    "jade": "^1.11.0",
+    "jsonwebtoken": "^9.0.2",
+    "moment": "^2.30.1",
+    "moment-timezone": "^0.5.46",
+    "multer": "^1.4.5-lts.1",
+    "mysql2": "^3.11.3",
+    "nodemailer": "^6.9.16",
+    "nodemon": "^3.1.7",
+    "winston": "^3.15.0"
+  },
+  "devDependencies": {
+    "prettier": "^3.3.3"
+  }
+}

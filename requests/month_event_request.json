@@ -1,0 +1,131 @@
+{
+    "query": {
+        "bool": {
+            "must": [],
+            "filter": [
+                {
+                    "term": {
+                        "SiteId": 111
+                    }
+                },
+                {
+                    "terms": {
+                        "ZoneId": [
+                            1,
+                            2,
+                            3,
+                            4,
+                            5
+                        ]
+                    }
+                },
+                {
+                    "term": {
+                        "isViolation": 0
+                    }
+                },
+                {
+                    "term": {
+                        "Direction.keyword": "IN"
+                    }
+                },
+                {
+                    "term": {
+                        "NotificationType": "7"
+                    }
+                }
+            ]
+        }
+    },
+    "aggs": {
+        
+        "CurrentWeek": {
+            "filter": {
+                "range": {
+                    "DateTime": {
+                        "gte": "2022-08-07T00:00:00.000Z",
+                        "lte": "2022-08-14T00:00:00.000Z"
+                    }
+                }
+            },
+            "aggs": {
+                "dayOfWeek": {
+                    "terms": {
+                        "script": "(doc['@timestamp'].value.dayOfWeek == 1 ? 'Monday' : (doc['@timestamp'].value.dayOfWeek == 2 ? 'Tuesday' : ((doc['@timestamp'].value.dayOfWeek == 3 ? 'Wednesday' : ((doc['@timestamp'].value.dayOfWeek == 4 ? 'Thursday' : ((doc['@timestamp'].value.dayOfWeek == 5 ? 'Friday' : ((doc['@timestamp'].value.dayOfWeek == 6 ? 'Saturday' : 'Sunday'))))))))))"
+                    }
+                },
+                "date_interval": {
+                    "date_histogram": {
+                        "field": "DateTime",
+                        "interval": "day"
+                    }
+                }
+                
+
+            }
+        },
+        "PastWeek": {
+            "filter": {
+                "range": {
+                    "DateTime": {
+                        "gte": "2022-08-01T00:00:00.000Z",
+                        "lte": "2022-08-07T00:00:00.000Z"
+                    }
+                }
+            },
+            "aggs": {
+                "dayOfWeek": {
+                    "terms": {
+                        "script": "(doc['@timestamp'].value.dayOfWeek == 1 ? 'Monday' : (doc['@timestamp'].value.dayOfWeek == 2 ? 'Tuesday' : ((doc['@timestamp'].value.dayOfWeek == 3 ? 'Wednesday' : ((doc['@timestamp'].value.dayOfWeek == 4 ? 'Thursday' : ((doc['@timestamp'].value.dayOfWeek == 5 ? 'Friday' : ((doc['@timestamp'].value.dayOfWeek == 6 ? 'Saturday' : 'Sunday'))))))))))"
+                    }
+                },
+                "date_interval": {
+                    "date_histogram": {
+                        "field": "DateTime",
+                        "interval": "day"
+                    }
+                }
+            }
+             
+                
+            
+        },
+        "CurrentMonth": {
+            "filter": {
+                "range": {
+                    "DateTime": {
+                        "gte": "2022-08-01T00:00:00.000Z",
+                        "lte": "2022-08-07T00:00:00.000Z"
+                    }
+                }
+            },
+            "aggs": {
+                "date_interval": {
+                    "date_histogram": {
+                        "field": "DateTime",
+                        "interval": "day"
+                    }
+                }
+            }
+        },
+        "PastMonth": {
+            "filter": {
+                "range": {
+                    "DateTime": {
+                        "gte": "2022-07-07T00:00:00.000Z",
+                        "lte": "2022-07-14T00:00:00.000Z"
+                    }
+                }
+            },
+            "aggs": {
+                "date_interval": {
+                    "date_histogram": {
+                        "field": "DateTime",
+                        "interval": "day"
+                    }
+                }
+            }
+        }
+    }
+}
+

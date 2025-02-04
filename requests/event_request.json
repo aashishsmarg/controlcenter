@@ -1,0 +1,94 @@
+{
+    "query": {
+        "bool": {
+            "must": [],
+            "filter": [
+                {
+                    "term": {
+                        "SiteId": "111"
+                    }
+                },
+                {
+                    "terms": {
+                        "ZoneId": 1
+                    }
+                },
+                {
+                    "term": {
+                        "isViolation": 0
+                    }
+                },
+                {
+                    "term": {
+                        "Direction.keyword": "IN"
+                    }
+                },
+                {
+                    "term": {
+                        "NotificationType": "7"
+                    }
+                },
+                {
+                    "range": {
+                        "DateTime": {
+                            "gte": "2021-08-28T00:00:00.000Z",
+                            "lte": "2021-08-28T23:59:59.999Z"
+                        }
+                    }
+                },
+                {
+                    "term": {
+                        "Event.keyword": "Independe"
+                    }
+                },
+                {
+                    "term": {
+                        "IsEvent": 1
+                    }
+                }
+                
+            ]
+        }
+    },
+    "aggs": {
+        "date_interval": {
+            "date_histogram": {
+                "field": "DateTime",
+                "interval": "day"
+            },
+            "aggs": {
+                "ZoneDetails": {
+                    "terms": {
+                        "field": "Zone.keyword"
+                    },
+                    "aggs": {
+                        "ZoneGender": {
+                            "terms": {
+                                "field": "Gender.keyword"
+                            }
+                        },
+                        "ZoneAgeGroup": {
+                            "terms": {
+                                "field": "AgeGroup.keyword"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "ZoneDetails_Hourly_Count": {
+            "terms": {
+                "field": "Zone.keyword"
+            },
+            "aggs": {
+                "HoulyCount": {
+                    "date_histogram": {
+                        "field": "DateTime",
+                        "interval": "hour",
+                        "format": "yyyy-MM-dd HH:mm:ss"
+                    }
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,52 @@
+doctype html
+html
+	head
+		include ../layout/common_css.jade
+	body.hold-transition.skin-blue.sidebar-mini
+		.wrapper
+			include ../layout/navigation.jade
+			include ../layout/sidebar.jade
+			.content-wrapper.contentwp.webScroll
+					section.content-header(class="dplnone")  
+						h1 
+							| Queue Management
+					section.content.contentcss
+						.box
+							.box-header.with-border
+								.row
+									<label  class="col-sm-1 control-label timeflt_label" >Duration</label>		
+									.col-sm-3
+										div
+											select(name='datefilter' class="datefilter dropdowncolor").form-control.select2
+													option(value="today") 
+														| Today
+													option(value="yesterday") 
+														| Yesterday 									
+													option(value="week") 
+														| This Week
+													option(value="thismonth") 
+														| This Month
+													option(value="3month") 
+														| 3 Months	
+													option(value="6month") 
+														| 6 Months	
+													option(value="custom") 
+														| Custom										
+									<label  class="col-sm-1 control-label site_label" >Site</label>		
+									.col-sm-3
+										div
+											select(name='sitefilter' class="sitefilter dropdowncolor" id="sitef").form-control.select2
+												each datasite in data									
+													option(value="#{datasite.site_id},#{datasite.dashboard_version},#{datasite.start_time},#{datasite.end_time}") 
+														| #{datasite.site_name}
+							.box-body
+								.row
+									.col-xs-12
+										<div class= "retaildiv"  width="100%" style ="height:calc(100vh - 179px);padding-top:0px;">
+										<iframe  id="addashboard"  width="100%" height="100%"></iframe>	
+										</div>									
+														
+			include ../layout/footer.jade
+			include ../layout/common_js.jade
+			script(type='text/javascript', src='/js/ad_dashboard.js') //- temprory impot this , have to import its js when it is used
+			script(type='text/javascript', src='/js/commonjs/site_date_filter.js')

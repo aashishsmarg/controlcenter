@@ -1,0 +1,46 @@
+header.main-header
+	<div class="overlay dplnone" id="headerspinner"></div>
+	a(href='#').logo
+		span.logo-mini
+			img(class='imageSetting logomini_img' , src='/images/SMARG_LOGO.png', alt='logo' ) 
+		span.logo-(class="spanlogo")
+			//- <b>SMARG</b>
+			img(classname='imageSetting logoweb', src='/images/Login_Logo120x24.png', alt='logo') 
+	nav(role='navigation').navbar.navbar-static-top
+		a(href='#', role='button', data-toggle='offcanvas').sidebar-toggle
+			span.sr-only Toggle Navigation
+			span.icon-bar
+			span.icon-bar
+			span.icon-bar
+			<span id="controlheader" class="control contcent_txt" >Control Center<span>
+		div.navbar-custom-menu
+			ul.nav.navbar-nav
+				li.dropdown.user.user-menu
+					a(href class="username")
+						span(id="user_id" data-user-id="#{user_id}")
+							| #{username} 
+				li.dropdown.user.user-menu
+					a(href class="seperator")
+						span()
+							| |				
+				li.dropdown.user.user-menu(class="tooltips")
+					a(href='/logout' onclick="logoutbuttonclick()")
+						i.fa.fa-sign-out.fa-lg()
+							<span class="tooltiptexts">Logout</span>
+	
+	//- <div class="modal fade bd-example-modal-lg" id="notificationModal2" style="width:100%;height:auto;" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2">
+	//- <div class="modal-dialog modal-dialog-overview" role="document">
+	//- <div class="modal-content">
+	//- <div class="modal-header">
+	//- <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	//- <h4 style="" class="modal-title" id="myModalLabel2">! Alert !</h4>
+	//- </div>
+	//- <div class="modal-body d-flex align-items-center">
+	//- <img alt = ''  id = "overview_img2" style="width:100%;height:auto;margin:auto;"/>
+	//- </div>
+	//- <div class="modal-footer">
+	//- <button type="button" class="btn btn-success" data-dismiss="modal">Close</button>
+	//- </div>
+	//- </div>
+	//- </div>
+	//- </div>

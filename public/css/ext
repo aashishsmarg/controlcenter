@@ -1,0 +1,65 @@
+:root {
+  --primarycolor: #00a65a;
+  --secondarycolor: #009145;
+  --othercolor1 : #000000;
+  --othercolor2 : #ffffff;
+  --othercolor3 : #eaeaeaf2;
+  --othercolor4 : #19a55e;
+  --othercolor5 : #32a56a;
+  --othercolor6 : #007e3b;
+  /* --othercolor7 : #eaeaea;
+  --othercolor8 : #cab632;
+  --othercolor9 : #e2282e;
+  --othercolor10 : #d26fc3;
+  --othercolor11 : #ed6e13;
+  --othercolor12 : #8ebf42;
+  --othercolor13 : #ff0000;
+  --othercolor14 : #d2d6de;
+  --othercolor15 : #222d32;
+  --othercolor16 : #dddddd;
+  --othercolor17 : #555555;
+  --othercolor18 : #eaeaea;
+  --othercolor19 : #cccccc; */
+
+  /*Defining RGB some of the above colors*/
+  --othercolor1_rgb    : 0, 0, 0;
+  --othercolor2_rgb    : 255, 255, 255;
+  --othercolor3_rgb    : 0, 145, 69;
+  --othercolor4_rgb    : 25, 165, 94;
+  --othercolor5_rgb    : 50, 165, 106;
+  --othercolor6_rgb    : 0, 126, 59;
+  --othercolor7_rgb    : 234, 234, 234;
+  --othercolor8_rgb    : 255, 255, 255;
+
+
+  /* Fontsize heading in px */
+  --fontsize_h1             : 32px;
+  --fontsize_h2             : 24px;    
+  --fontsize_h3             : 18.72px; /*----Page Title-*/
+  --fontsize_h4             : 16px;     /*----Large Button text, Section title------*/
+  --fontsize_h5             : 13.28px;  /*---Body labels(body headings, form edit text, selectors)----*/
+  --fontsize_h6             : 10.72px;     /*Medium Button text*/
+  
+  
+  --fontsize_bodytext       : 12px;     
+  --fontsize_bodytext_title   : 14px; 
+  --fontsize_quote          : 18px;
+  --fontsize_leadbodytext   : 16px;
+  --fontsize_captions       : 10px;
+  --fontsize_footnote       : 13px;
+  --fontsize_bottonfont     : 12px;
+  --fontsize_linkfont       : 10.66px;
+  --fontsize_tableheader   : 15px; /* Table title */
+  --fontsize_tablebody   : 14px; /* Table body */
+  --fontsize_menu_submenu   : 14px;/* /Menu/Submenu/Page Menu/Tab label/ */
+  --tooltip_text   : 16px;
+  /* font-family */
+
+
+  /* 'Source Sans Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif */
+    --fontfmilyfirst  : 'Source Sans Pro';  
+  --fontfmilysecond : 'Helvetica Neue';
+  --fontfmilythird : 'Helvetica';
+  --fontfmilyfourth  : 'Arial';  
+  --fontfmilyfifth : 'sans-serif';
+}

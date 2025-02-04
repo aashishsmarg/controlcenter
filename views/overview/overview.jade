@@ -1,0 +1,114 @@
+doctype html
+html
+	head
+		include ../layout/common_css.jade
+
+
+
+	//- link(rel='stylesheet', href='/css/overview.css')
+	body.hold-transition.skin-blue.sidebar-mini
+		.wrapper
+			include ../layout/navigation.jade
+			include ../layout/sidebar.jade
+			.content-wrapper.contentwp.webScroll
+				section.content-header(class="dplnone")  
+					h1 
+						| Overview
+				section.content.contentcss
+					.box.overview-table
+						.box-header.with-border
+							.row
+								<label  class="col-sm-1 control-label site_label" >Site</label>		
+								.col-sm-3
+									div(class="abc")
+										select(name='sitefilter' class="sitefilteroverview dropdowncolor" class="abcd").form-control.select2
+											each datasite in datas								
+												option(value="#{datasite.site_id}" selected = ( "#{datasite.site_id}" === "#{v_siteid}")) 
+													| #{datasite.site_name}	
+
+
+						.box-body
+							form(class="overtable" role='form',method='post' action='/overview/test/#{sid}')
+								- if(messages.msg_info)
+									.alert.alert-success.alert-dismissable
+										button.close(type='button', data-dismiss='alert', aria-hidden='true')
+											| ×
+										h4
+											i.icon.fa.fa-check
+											| Success!
+										| !{messages.msg_info}
+								- if(messages.msg_error)
+									.alert.alert-danger.alert-dismissable
+										button.close(type='button', data-dismiss='alert', aria-hidden='true')
+											| ×
+										h4
+											i.icon.fa.fa-ban
+											| Alert!
+										| !{messages.msg_error}
+								table( id="example2" style="width:100%;table-layout:fixed;border-collapse:separate !important; line-height:24px; grid-template-areas: ' head-fixed' 'body-scrollable;" class="table table-bordered table-hover bodywrapcenter")
+									thead 
+										tr
+											th(style='width:6%' id="displaynone") S.No
+											th Camera
+											th Rule Category
+											th Rule
+											th Area
+											th Image
+											th Current View
+									tbody 
+										if messages.msg_error
+											| !{messages.msg_error}
+										else
+											for row, index in data 
+												tr()
+													td(style='text-align:center') #{index+1}
+													td(id = "cameragrpname") #{row.camera_name}
+													td #{row.category_name}
+													td #{row.rule_name}
+													td #{row.areaName}		
+													td(href="#myModalpopupimag" id = "vehicleanpr" data-toggle="modal" class="vehicleanpr")
+														<img src = "#{imgLink}/#{row.site_id}/#{row.image_path}" class="realimage" alt = '' \>
+														//- src ="#{row.image_path}"
+													td(href="#myModalpopupimag2" id = "vehicleanpr2" data-toggle="modal" class="vehicleanpr2")
+														<img src = "#{imgLink}/#{row.site_id}/#{row.current_view_image_path}" class="currentimage" alt = ''\>
+													<div class="modal fade bd-example-modal-lg" id="myModalpopupimag" style="width:100%;height:auto;" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+													<div class="modal-dialog modal-dialog-overview" role="document">
+													<div class="modal-content">
+													<div class="modal-header">
+													<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+													<h4 style="" class="modal-title" id="myModalLabel">Site Image</h4>
+													</div>
+													<div class="modal-body d-flex align-items-center">
+													<img alt = ''  id = "overview_img" style="width:100%;height:auto;margin:auto;"/>
+
+													</div>
+													<div class="modal-footer">
+													<button type="button" class="btn btn-success" data-dismiss="modal">Close</button>
+													//- <button type="button" class="btn btn-primary">Save changes</button>
+													</div>
+													</div>
+													</div>
+													</div>
+													<div class="modal fade bd-example-modal-lg" id="myModalpopupimag2" style="width:100%;height:auto;" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2">
+													<div class="modal-dialog modal-dialog-overview" role="document">
+													<div class="modal-content">
+													<div class="modal-header">
+													<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+													<h4 style="" class="modal-title" id="myModalLabel2">Current View Image</h4>
+													</div>
+													<div class="modal-body d-flex align-items-center">
+													<img alt = ''  id = "overview_img2" style="width:100%;height:auto;margin:auto;"/>
+
+													</div>
+													<div class="modal-footer">
+													<button type="button" class="btn btn-success" data-dismiss="modal">Close</button>
+													//- <button type="button" class="btn btn-primary">Save changes</button>
+													</div>
+													</div>
+													</div>
+													</div>
+
+			include ../layout/footer.jade
+			include ../layout/common_js.jade
+			script(type='text/javascript', src='/js/commonjs/site_date_filter.js')
+			script(type='text/javascript', src='/js/overview.js')

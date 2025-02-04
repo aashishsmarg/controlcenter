@@ -1,0 +1,51 @@
+{
+  "query": {
+    "bool": {
+      "must": [],
+      "filter": [
+        {
+          "term": {
+            "SiteId": 111
+          }
+        },
+        {
+          "term": {
+            "isViolation": 1
+          }
+        },
+        {
+          "terms": {
+            "NotificationType": "1"
+          }
+        },
+        {
+          "range": {
+            "DateTime": {
+              "gte": "2020-09-26T00:00:00Z",
+              "lte": "2020-12-26T11:00:00Z"
+            }
+          }
+        }
+      ]
+    }
+  },
+  "aggs": {
+      "ZoneDetails": {
+          "terms": {
+              "field": "Zone.keyword"
+          },
+          "aggs": {
+              "ZoneNotification": {
+                  "terms": {
+                      "field": "Notification.keyword"
+                  }
+              }
+          }
+      },
+      "TotalViolation": {
+          "terms": {
+              "field": "Notification.keyword"
+          }
+      }
+  }
+}

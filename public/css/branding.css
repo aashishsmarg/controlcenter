@@ -1,0 +1,73 @@
+:root {
+  --primarycolor  : #00a551;
+  --secondarycolor: #00a551;
+  --othercolor1 : #000000;
+  --othercolor2 : #ffffff;
+  --othercolor3 : #eaeaea;
+  --othercolor4 : #19a55e;
+  --othercolor5 : #32a56a;
+  --othercolor6 : #007e3b;
+  --othercolor7 : #00a65a;
+  --othercolor8 : #f6f6f6;
+  --othercolor9 : #dddddd;
+  --othercolor10: #ff0000;
+  --othercolor11: #3c3cd5;
+  --othercolor12: #008000;
+  --othercolor13: #555555;
+  --othercolor14: #cccccc;
+  --othercolor15: #d2d6de;
+  --othercolor16: #333333;
+  --othercolor17: #f39c12;
+  --othercolor18: #dd4b39;
+  /*Defining RGB some of the above colors*/
+
+  --primarycolor_rgb   : 0, 165, 81;
+  --secondarycolor_rgb : 0, 145, 69;
+  --othercolor1_rgb    : 0, 0, 0;
+  --othercolor2_rgb    : 255, 255, 255;
+  --othercolor3_rgb    : 234, 234, 234;
+  --othercolor4_rgb    : 25, 165, 94;
+  --othercolor5_rgb    : 50, 165, 106;
+  --othercolor6_rgb    : 0, 126, 59;
+  --othercolor7_rgb    : 0, 166, 90;
+  --othercolor8_rgb    : 246, 246, 246;
+
+
+  /* Fontsize heading in px */
+  --fontsize_h1             : 32px;
+  --fontsize_h2             : 24px;    
+  --fontsize_h3             : 18.72px; /*----Page Title-*/
+  --fontsize_h4             : 16px;     /*---- Section title------*/
+  --fontsize_h5             : 13.28px;  /*---Body labels(body headings, form edit text, selectors)----*/
+  --fontsize_h6             : 10.72px;     /*text*/
+  
+
+  ----fontsize_buttonsmall  : 12px;  
+  ----fontsize_buttonmedium : 14px;
+  ----fontsize_buttonlarge  : 18px;
+  
+  --fontsize_bodytext       : 14px;     
+  --fontsize_bodytext_title   : 16px; 
+  --fontsize_quote          : 18px;
+  --fontsize_leadbodytext   : 16px;
+  --fontsize_captions       : 10px;
+  --fontsize_footnote       : 13px;
+  --fontsize_bottonfont     : 12px;
+  --fontsize_linkfont       : 10.66px;
+  --fontsize_tableheader   : 15px; 
+  --fontsize_tablebody   : 14px; 
+  --fontsize_modalheader   : 16px; 
+  --fontsize_modalbody   : 14px; 
+  --fontsize_modalfooter   : 14px; 
+  --fontsize_menu_submenu   : 14px;
+  --tooltip_text   : 16px;
+  /* font-family */
+
+
+  /* 'Source Sans Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif */
+    --fontfmilyfirst  : 'Source Sans Pro';  
+  --fontfmilysecond : 'Helvetica Neue';
+  --fontfmilythird : 'Helvetica';
+  --fontfmilyfourth  : 'Arial';  
+  --fontfmilyfifth : 'sans-serif';
+}

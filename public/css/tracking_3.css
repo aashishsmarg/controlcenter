@@ -1,0 +1,78 @@
+body{font-family: sans-serif;margin:0px;}.flaggreen{color:black!important}
+.content_css{background: antiquewhite;height: auto;}
+.content_bx{border-top: 0px;margin-bottom: 0px;}
+.bx_header{height:10.3%;margin-top:50px;}
+.bx_row{height:100%;}
+.titlefont{font-size: 50px;font-weight: 600;}
+.titlesection{display: flex;align-items: center;height:100%;padding-left: 0px;}
+.titlesection_div{float:left;}
+.col_row{background-color:#FFFFFF;height:100%;text-align:center ; }
+.logosection{height:100%;padding-right: 0px;}
+.logosection_div{float:right;}
+.logo_header{width: 47vh;}
+.bx_body{
+background-color: #eaeaeaf2;
+height: 100%;
+margin-top: 100px;
+margin-bottom:100px;
+}
+
+.mtrVis__value {
+    max-width: 100%;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
+    word-wrap: normal !important;
+    font-weight: 700;
+    font-size: 40px !important;
+}
+.aligned{display: flex;align-items: center; }
+.floatright{float:right; background-color:white;}
+.floatleft{float:left;}
+.footerlr_text{margin-top: 0px;margin-right: 8px;font-size: 18px;font-weight: 550;}
+.mainfooter{
+    padding-top: 20px;
+padding-bottom: 20px;
+padding-left: 10px;
+padding-right: 10px;
+height: 60px;
+margin-top: 50px;
+margin-bottom: 50px;
+}
+.width80{width:80px;}
+.tractiondiv{height: auto;background: #FFFFFF;}
+/*.titlesectiondiv{text-align: ;}*/
+#tracking
+{
+    width: 65%;position: relative;margin: 0px auto 0 auto;top: 17%;justify-content: center;display: flex;height:288px;
+}
+@media (max-width: 821px) {
+    .logo_header {
+        width: 38vh;
+    }
+
+    .logosection {
+        height: 88%;
+        padding-right: 0px;
+        justify-content: center;
+    display: flex;
+    align-items: center;
+    }
+    .titlesection {
+        height: 0%;
+        justify-content: center;
+    }
+    .titlefont {
+        font-size: 25px;
+    }
+
+    .footerlr_text {
+        font-size: 15px;
+    }
+    .mainfooter{
+    padding-left: 10px;
+    padding-right: 10px;
+    height: 60px;
+   
+    }
+}

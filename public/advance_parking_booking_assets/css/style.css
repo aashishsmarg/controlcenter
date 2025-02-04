@@ -1,0 +1,154 @@
+body{
+	background: #e6e6fab3;
+	font-family: 'Source Sans Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+.button {
+    display: block;
+    
+}
+.nav_bar{
+	background: #008551;
+}
+.nav_bar .logo svg{
+	padding: 5px;
+	width: 70px!important;
+}
+.nav_bar h4{
+	margin-left: 10px;
+	margin-right: 300px;
+	color: white;
+}
+
+
+input[type=text]:focus {
+outline: none !important;
+border: 0px #00a551;
+box-shadow: inset 0 1px 1px rgba(87, 224, 32, 0.075), 0 0 8px rgba(6, 221, 71, 0.788);
+}
+
+
+
+#mainsuccessMessage{
+color:#00a551
+}
+#searchform1{
+background-color:whitE;
+margin-top: 20PX;
+height:950px;
+}
+.backtobooking{
+
+display: block;
+width: 200px;
+height: 40px;
+padding: 10px;
+text-align: center;
+border-radius: 5px;
+color: white;
+line-height: 25px;
+background-color:#00a551 ;
+color:#FFF;
+border-color:#00a551 ;
+}
+
+
+.lbl{
+margin-left:0%;
+
+padding-top: 2%;
+font-weight: 600;
+}
+.h4
+{
+ font-weight: bold;	
+ padding-top: 2%;
+}
+#table{
+	background-color:whitE;
+	margin-top: 20PX;
+	min-height: 200px;
+	max-height: auto;
+}
+
+#form{
+	background-color:whitE;
+	margin-top: 20PX;
+	height:950px;
+}
+.img{
+	width: 200px;
+	
+	display: block;
+  margin-left: auto;
+  margin-right: auto;
+  padding-top: 5%; 
+}
+.powered_by{
+	text-align: center;
+	padding-top: 0px;
+	
+
+} 
+.powered_by p{
+	font-size: 15px;
+	color:#7d848c;
+	
+
+}
+.copy_rights{
+	padding-top: 0px;
+	margin-bottom: 10px;
+}
+.copy_rights p{
+	font-size: 14px;
+	color:#7d848c;
+}
+input[type=text]:focus {
+	border: 0px #00a551 ;
+  }
+ 
+.datepicker table tr td.active,
+.datepicker table tr td.active:hover {
+    background: #00a551;
+    text-shadow: black;
+	text-decoration: solid;
+}
+.btn-success
+ {
+ 
+background-color:#00a551 ;
+ 
+color:#FFF;
+ 
+border-color:#00a551  ;
+ 
+}
+.pay
+{
+
+		position: center;
+		top: 50%;
+}
+
+
+/*--------------------------*/
+
+.ofxauto
+{
+	overflow-x:auto;
+}
+
+.headingtb
+{
+	text-align:center; padding-bottom:20px;
+}
+.floatright
+{
+	float: right;
+}
+.pd10
+{
+	padding:10px;
+}
+
+

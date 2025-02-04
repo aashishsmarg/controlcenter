@@ -1,0 +1,138 @@
+doctype html
+html
+    head
+        include ../layout/common_css.jade
+        //- link(rel='stylesheet', href='/css/dashboard.css')
+    body.hold-transition.skin-blue.sidebar-mini
+        .wrapper
+            include ../layout/navigation.jade
+            include ../layout/sidebar.jade
+            .content-wrapper.contentwp.webScroll
+                    section.content-header(class="dplnone")  
+                        h1 
+                            | Dashboard
+                    section.content.contentcss
+                        .box
+                            .box-body
+                                .row
+                                    .col-md-4.col-sm-6.col-xs-6
+                                        .info-box
+                                            span.info-box-icon.theme-color
+                                                i.fa.fa-map-marker
+                                            .info-box-content
+                                                span.info-box-text Sites
+                                                span.info-box-number(id='sit_id')
+                                                    | #{countsitedata}
+                                                    //- small %
+                                    .col-md-4.col-sm-6.col-xs-6
+                                        .info-box
+                                            span.info-box-icon.bg-yellow
+                                                i.fa.fa-sitemap
+                                            .info-box-content
+                                                span.info-box-text Zones
+                                                span.info-box-number
+                                                    | #{countzonedata}
+                                                    //- small %
+                                    .col-md-4.col-sm-6.col-xs-12
+                                        .info-box
+                                            span.info-box-icon.bg-red
+                                                i.fa.fa-clipboard
+                                            .info-box-content
+                                                span.info-box-text Rules
+                                                span.info-box-number
+                                                    | #{countruledata}
+                                .row
+                                    <label class="col-sm-1 control-label timeflt_label">Duration</label>		
+                                    div
+                                        .col-sm-3
+                                            div
+                                                select(name='datefilter' class="datefilter dropdowncolor").form-control.select2
+                                                    option(value="today") 
+                                                        | Today
+                                                    option(value="yesterday") 
+                                                        | Yesterday 									
+                                                    option(value="week") 
+                                                        | Last 7 days
+                                                    option(value="thismonth") 
+                                                        | Last 30 days
+                                                    option(value="3month") 
+                                                        | 3 Months	
+                                                    option(value="6month") 
+                                                        | 6 Months	
+                                                    option(value="custom") 
+                                                        | Custom	
+                                        .col-sm-3
+                                            div(class="dplnone")
+                                                select(name='sitefilter' class="sitefilter dropdowncolor" id="sitef").form-control.select2
+                                                    each datasite in datas
+                                                        - if(countsitedata>1)									
+                                                            option(value="#{datasite.site_id},#{datasite.dashboard_version},#{datasite.cl_start_time},#{datasite.cl_end_time}") 
+                                                                | #{datasite.site_name}
+                                                        - else
+                                                            option(value="#{datasite.site_id},#{datasite.dashboard_version},#{datasite.start_time},#{datasite.end_time}") 
+                                                                | #{datasite.site_name}
+
+                                        .col-sm-3
+                                            div(class="colmddiv")
+                                            <div class="modal fade" id="custom" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                                            <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                            <div class="modal-header mdheader">
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                            <span class="modal-title" id="custom">Select Duration</span>
+                                            </div>
+                                            <div class="modal-body">
+                                            <div class="form-group mbdy_fromgrp">
+                                            <div class="col-sm-2 numbs">
+                                            <label for="team_name-inline" class="mfrmlabel_cal" >From</label>
+                                            </div>
+                                            <div class="col-sm-4">
+                                            <div class="input-group date">
+                                            <div class="input-group-addon">
+                                            <i class="fa fa-calendar"></i>
+                                            </div>
+                                            <input type="text" class="form-control pull-right" id="from">
+                                            </div>
+                                            </div>
+                                            <div class="col-sm-2 numbs">
+                                            <label for="team_name-inline"  class="mtolabel_cal" >To</label>
+                                            </div>
+                                            <div class="col-sm-4">
+                                            <div class="input-group date">
+                                            <div class="input-group-addon">
+                                            <i class="fa fa-calendar"></i>
+                                            </div>
+                                            <input type="text" class="form-control pull-right" id="to">
+                                            </div>
+                                            </div>
+                                            </form>
+                                            </div>
+                                            </div>
+                                            <div class="pdf grpreport" id="report"  >
+                                            </div>
+                                            <div class="modal-footer">
+                                            <button type='submit' class="btn btn-success" onclick="graphdashboard('#{countsitedata}')">Ok</button>
+                                            <button type="button" class="btn btn-success" onclick="canclebtnclick()" id='close-button' data-dismiss="modal">Cancel</button></div>
+                                            </div>
+                                            </div>
+                                            </div>
+                                .row
+                                    div
+                                        .col-sm-3(id="frto" class="frmdiv")
+                                            <div class="sidebar" id="frto"> 
+                                            <label class="frm_text">From:</label>
+                                            <label id="fromd" class="frm_label" ></label>
+                                            </div>
+                                        .col-sm-3(id="tdo" class="todiv")
+                                            <div class="sidebar" id="tdo" > 
+                                            <label class="to_text">To:</label>
+                                            <label id ="tod" class="to_label"></label>  
+                                            </div>	
+                                        .col-sm-12
+                                            <div class= "dashboarddiv dashcss" style="height:calc(100vh - 348px)"width="100%">
+                                            <iframe  id = "dashboarddata" frameborder="0" width="100%" style="height:99.5%;" class="responsive-iframe dsh_grp" ></iframe>
+                                            </div>
+            include ../layout/footer.jade
+            include ../layout/common_js.jade
+            script(type='text/javascript', src='/js/commonjs/site_date_filter.js')
+            script(type='text/javascript', src='/js/dashboard.js')

@@ -1,0 +1,256 @@
+{
+    "size": 0,
+    "query": {
+        "bool": {
+            "must": [],
+            "must_not": {
+                "exists": {
+                    "field": "OverAllCount"
+                }
+            },
+            "filter": [
+                {
+                    "terms": {
+                        "SiteId": [
+                            112
+                        ]
+                    }
+                },
+                {
+                    "terms": {
+                        "CameraID": []
+                    }
+                },
+                {
+                    "term": {
+                        "isViolation": 0
+                    }
+                },
+                {
+                    "term": {
+                        "Direction.keyword": "IN"
+                    }
+                },
+                {
+                    "term": {
+                        "NotificationType": 7
+                    }
+                },
+                {
+                    "range": {
+                        "DateTime": {
+                            "gte": "2024-04-08T04:00:00.00Z",
+                            "lte": "2024-04-10T04:00:00.00Z"
+                        }
+                    }
+                }
+            ]
+        }
+    },
+    "aggs": {
+        "total_count": {
+            "value_count": {
+                "field": "NotificationType"
+            }
+        },
+        "block_wise_total": {
+            "terms": {
+                "field": "Block.keyword",
+                "size": 40
+            },
+            "aggs": {
+                "GenderHourly": {
+                    "terms": {
+                        "field": "Gender.keyword"
+                    }
+                },
+                "AgeGroupHourly": {
+                    "terms": {
+                        "field": "AgeGroup.keyword"
+                    }
+                }
+            }
+        },
+        "floor_wise_total": {
+            "terms": {
+                "field": "Floor.keyword",
+                "size": 40
+            },
+            "aggs": {
+                "GenderHourly": {
+                    "terms": {
+                        "field": "Gender.keyword"
+                    }
+                },
+                "AgeGroupHourly": {
+                    "terms": {
+                        "field": "AgeGroup.keyword"
+                    }
+                }
+            }
+        },
+        "passage_wise_total": {
+            "terms": {
+                "field": "Passage.keyword",
+                "size": 40
+            },
+            "aggs": {
+                "GenderHourly": {
+                    "terms": {
+                        "field": "Gender.keyword"
+                    }
+                },
+                "AgeGroupHourly": {
+                    "terms": {
+                        "field": "AgeGroup.keyword"
+                    }
+                }
+            }
+        },
+        "store_wise_total": {
+               "terms": {
+                "field": "Category.keyword",
+                "size": 40
+            },
+            "aggs": {
+               "GenderHourly": {
+                    "terms": {
+                        "field": "Gender.keyword"
+                    }
+                },
+                "AgeGroupHourly": {
+                    "terms": {
+                        "field": "AgeGroup.keyword"
+                    }
+                }
+                
+            }
+        },
+        "day_wise_passage_and_store_footfall_count": {
+            "date_histogram": {
+                "field": "DateTime",
+                "calendar_interval": "day"
+            },
+            "aggs": {
+                "store_filter": {
+                    "filter": {
+                        "exists": {
+                            "field": "Category.keyword"
+                        }
+                    },
+                    "aggs": {
+                        "StoreDayWiseCount": {
+                            "terms": {
+                                "field": "Camera.keyword",
+                                "size": 40
+                            },
+                            "aggs": {
+                                "StoreGender": {
+                                    "terms": {
+                                        "field": "Gender.keyword"
+                                    }
+                                },
+                                "StoreAgeGroup": {
+                                    "terms": {
+                                        "field": "AgeGroup.keyword"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "passage_filter": {
+                    "filter": {
+                        "exists": {
+                            "field": "Passage.keyword"
+                        }
+                    },
+                    "aggs": {
+                        "PassageDayWiseCount": {
+                            "terms": {
+                                "field": "Passage.keyword",
+                                "size": 40
+                            },
+                            "aggs": {
+                                "PassageGender": {
+                                    "terms": {
+                                        "field": "Gender.keyword"
+                                    }
+                                },
+                                "PassageAgeGroup": {
+                                    "terms": {
+                                        "field": "AgeGroup.keyword"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                
+            }
+        },
+        "hour_wise_passage_and_store_footfall_count": {
+            "date_histogram": {
+                "field": "DateTime",
+                "fixed_interval": "1h",
+                "format": "yyyy-MM-dd HH:mm:ss"
+            },
+            "aggs": {
+                "store_filter": {
+                    "filter": {
+                        "exists": {
+                            "field": "Category.keyword"
+                        }
+                    },
+                    "aggs": {
+                        "StoreHourWiseCount": {
+                            "terms": {
+                                "field": "Camera.keyword",
+                                "size": 40
+                            },
+                            "aggs": {
+                                "GenderHourly": {
+                                    "terms": {
+                                        "field": "Gender.keyword"
+                                    }
+                                },
+                                "AgeGroupHourly": {
+                                    "terms": {
+                                        "field": "AgeGroup.keyword"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "passage_filter": {
+                    "filter": {
+                        "exists": {
+                            "field": "Passage.keyword"
+                        }
+                    },
+                    "aggs": {
+                        "PassageHourWiseCount": {
+                            "terms": {
+                                "field": "Passage.keyword",
+                                "size": 40
+                            },
+                            "aggs": {
+                                "GenderHourly": {
+                                    "terms": {
+                                        "field": "Gender.keyword"
+                                    }
+                                },
+                                "AgeGroupHourly": {
+                                    "terms": {
+                                        "field": "AgeGroup.keyword"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

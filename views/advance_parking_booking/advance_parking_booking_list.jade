@@ -1,0 +1,69 @@
+doctype html
+html
+	head
+		title
+			| ADVANCE PARKING
+		meta(content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport')
+		link(rel='stylesheet', href='/adminlte/bootstrap/css/bootstrap.min.css')
+		link(rel='stylesheet', href='/font-awesome/css/font-awesome.css')
+		script(src="/advance_parking_booking_assets/js/jquery.min.js")
+		script(src="/advance_parking_booking_assets/js/popper.min.js")
+		script(src="/advance_parking_booking_assets/js/bootstrap.min.js")
+		link(rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css')
+		link(rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.css")
+		script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js")
+		script(src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js")
+		script(src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js")
+		script(src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js")
+		script(type="text/javascript",src="/advance_parking_booking_assets/js/advanceparkingbooking.js")
+
+		link(rel='stylesheet', href='/adminlte/plugins/iCheck/square/blue.css')
+		link(rel="shortcut icon" href="/images/SMARG_LOGO.png" type="image/png")
+		link(rel='stylesheet', href='/css/haeadercolor.css')
+		link(rel='stylesheet',href='/advance_parking_booking_assets/css/style.css')
+	body
+		div
+			div(class="container mt-4")
+				.row
+					div(class="col-md-12 ofxauto",id="table" )
+						img.img(src="/advance_parking_booking_assets/img/SMARG_LOGO.jpg" alt="top-logo")
+						h4(class="h4 headingtb") Advance Parking List
+						table(class="table table-bordered ofxauto")
+							thead
+								tr
+								th(scope="col") s.no
+							
+								th(scope="col") Vehicle Number
+								th(scope="col") Details 
+								
+							tbody 
+								for row, index in vehicledata
+									tr 
+										td #{index+1}
+										
+										td #{row.vehicle_number}
+										td 
+											table(class="table table-bordered")
+												thead
+													tr 
+														td Parking Site: #{row.parking_name}
+													tr 
+														td Parking Start Time: #{row.parking_start_time}
+													tr 
+														td Parking End Time:#{row.parking_end_time}
+													tr 
+														td Parking Charges:#{row.parking_charges}
+													
+										
+						div(class="powered_by text-center")
+								p(class="mb-0") Powered by Smarg
+								a(class="mb-0",href="https://www.smargtech.com") www.smargtech.com
+							div(class="copy_rights text-center")
+								p(class="mb-0")
+								small ©2024 Smarg Technologies Pvt. Ltd. All rights reserved
+								
+
+
+								
+
+

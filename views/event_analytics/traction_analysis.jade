@@ -1,0 +1,225 @@
+doctype html
+html
+	head
+		include ../layout/common_css.jade
+		link(rel='stylesheet', href='/css/tractionanalysis.css')
+	body.hold-transition.skin-blue.sidebar-mini
+		.wrapper
+			include ../layout/navigation.jade
+			include ../layout/sidebar.jade
+			.content-wrapper.contentwp
+					section.content-header(class="dplnone")  
+						h1 
+							| Traction Analytics
+					section.content.contentcss
+						.box
+							.box-header.with-border
+								.row
+									<label  class="col-sm-1 control-label timeflt_label etimeflt_label" >Duration</label>		
+									.col-sm-2
+										div
+											select(name='datefilter' class="datefilter dropdowncolor").form-control.select2
+													option(value="today") 
+														| Today
+													option(value="yesterday") 
+														| Yesterday 									
+													option(value="week") 
+														| This Week
+													option(value="thismonth") 
+														| This Month
+													option(value="3month") 
+														| 3 Months	
+													option(value="6month") 
+														| 6 Months	
+													option(value="custom") 
+														| Custom										
+									<label  class="col-sm-1 control-label site_label" >Site</label>		
+									div(class="col-sm-3 colsm3 sitedpcol" )
+											select(name='sitefilter' class="sitefilter dropdowncolor" id="sitef").form-control.select2
+												each datasite in data									
+													option(value="#{datasite.site_id},#{datasite.dashboard_version},#{datasite.start_time},#{datasite.end_time}"  selected = ( "#{datasite.site_id}" === "#{v_siteid}")) 
+														| #{datasite.site_name}
+									<label class="col-sm-1 control-label event_label">Events</label>		
+									div(class="col-sm-3 colsm3 evdpcol" )
+										div
+											select(name='eventfilter' class="eventfilter dropdowncolor" id="events_d").form-control.select2
+												each dataevent in event_data									
+													option(value="#{dataevent.stg_id}") 
+														| #{dataevent.tag_value}
+									//- .col-sm-3.colsm2.reportdisable.event_reportbtn
+									//- 	div(class="")
+									//- 	<a href="#mymodelpopup" data-toggle="modal"><button type="button" class="btn btn-success egrpreport">Generate Report</button></a>
+									//- 	<div class="modal fade" id="mymodelpopup" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+									//- 	<div class="modal-dialog" role="document">
+									//- 	<div class="modal-content">
+									//- 	<div class="modal-header mdheader">
+									//- 	<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+									//- 	<span class="modal-title" id="mymodelpopup">Event Report</span>
+									//- 	</div>
+									//- 	<div class="modal-body">
+									//- 	<div class="form-group mbdy_fromgrp">
+									//- 	<div class="col-sm-2 numbs">
+									//- 	<label for="team_name-inline" class="mfrmlabel_cal">From</label>
+									//- 	</div>
+									//- 	<div class="col-sm-4">
+									//- 	<div class="input-group date">
+									//- 	<div class="input-group-addon">
+									//- 	<i class="fa fa-calendar"></i>
+									//- 	</div>
+									//- 	<input type="text" class="form-control pull-right" id="datepicker5">
+									//- 	</div>
+									//- 	</div>
+									//- 	<div class="col-sm-2 numbs">
+									//- 	<label for="team_name-inline" class="mtolabel_cal" >To</label>
+									//- 	</div>
+									//- 	<div class="col-sm-4">
+									//- 	<div class="input-group date">
+									//- 	<div class="input-group-addon">
+									//- 	<i class="fa fa-calendar"></i>
+									//- 	</div>
+									//- 	<input type="text" class="form-control pull-right" id="datepicker6">
+									//- 	</div>
+									//- 	</div>
+									//- 	</form>
+									//- 	</div>
+									//- 	<div class="pdf  grpreport" id="report" >
+									//- 	<div class="dplnone">
+									//- 	<input type="radio" id="ritemb" name="optradio" value="0" checked>
+									//- 	<label for="ritemb">XLS Report</label>
+									//- 	</div>
+									//- 	</div>
+									//- 	</div>
+									//- 	<div class="modal-footer">
+									//- 	<button type='submit' class="btn btn-success" onclick="download_traction_analytics_report('#{sccauth_token},#{v_siteid}')">Download Report</button>
+									//- 	<button type="button" class="btn btn-success" id='close-button' onclick="canclebtnclick()" data-dismiss="modal">Close</button></div>
+									//- 	</div>
+									//- 	</div>
+									//- 	</div>
+									//- .col-sm-3.colsm1.reportdisable.pull-right
+									//- 	div(class="colmddiv event_colmddiv")
+									//- 	<a a href='javascript:;' onclick='event_tracking_page();'><button type="button" class="btn btn-success trackingbtn" ><i class="fa fa-calendar" aria-hidden="true"></i></button></a>
+									.col-sm-3 
+										div(class="colmddiv")
+										<div class="modal fade" id="waitmodel" tabindex="-1" role="dialog" aria-labelledby="waitmodel">
+										<div class="modal-dialog" role="document">
+										<div class="modal-content">
+										<div class="modal-header mdheader">
+										<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+										<span class="modal-title" id="waitmodel">Event Report</span>
+										</div>
+										<div class="modal-body">
+										<div class="form-group mbdy_fromgrp">
+										<div class="row-sm-2 numbs">
+										<p class="genrep_btn">Generating Report</p>
+										</div>
+										</div>
+										</div>
+										<div class="modal-footer">
+										<button type="button" id='close-button' class="btn btn-success" data-dismiss="modal">Close</button></div>
+										</div>
+										</div>
+										</div>
+									.col-sm-3 
+										div(class="colmddiv")
+										<div class="modal fade" id="alertwarn" tabindex="-1" role="dialog" aria-labelledby="alertwarn">
+										<div class="modal-dialog" role="document">
+										<div class="modal-content">
+										<div class="modal-header mdheader" >
+										<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+										<span class="modal-title" id="alertwarn">Event Report</span>
+										</div>
+										<div class="modal-body">
+										<div class="form-group mbdy_fromgrp" >
+										<p class="md_errmsg">There is some server error</p>
+										</div>
+										</div>
+										<div class="modal-footer">
+										<button type="button" id='close-button' class="btn btn-success" data-dismiss="modal">Close</button></div>
+										</div>
+										</div>
+										</div>	
+									.col-sm-3 
+										div(class="colmddiv")
+										<div class="modal fade" id="custom" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+										<div class="modal-dialog" role="document">
+										<div class="modal-content">
+										<div class="modal-header mdheader">
+										<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+										<span class="modal-title" id="custom">Select Duration</span>
+										</div>
+										<div class="modal-body">
+										<div class="row">
+										<div class="form-group mbdy_fromgrp">
+										<div class="col-sm-2 numbs">
+										<label for="team_name-inline" class="mfrmlabel_cal">From</label>
+										</div>
+										<div class="col-sm-4">
+										<div class="input-group date">
+										<div class="input-group-addon">
+										<i class="fa fa-calendar"></i>
+										</div>
+										<input type="text" class="form-control pull-right" id="from">
+										</div>
+										</div>
+										<div class="col-sm-2 numbs">
+										<label for="team_name-inline" class="mtolabel_cal">To</label>
+										</div>
+										<div class="col-sm-4">
+										<div class="input-group date">
+										<div class="input-group-addon">
+										<i class="fa fa-calendar"></i>
+										</div>
+										<input type="text" class="form-control pull-right" id="to">
+										</div>
+										</div>
+										</form>
+										</div>
+										</div>
+										</div>			
+										<div class="modal-footer">
+										button(type='submit' class="btn btn-success" onclick="eso_dashboard('traction')") Ok
+										<button type="button" class="btn btn-success" onclick="canclebtnclick()"  id='closer' data-dismiss="modal">Cancel</button></div>
+										</div>
+										</div>
+										</div>			
+							.box-body
+								- if(messages.msg_info)
+									.alert.alert-success.alert-dismissable
+										button.close(type='button', data-dismiss='alert', aria-hidden='true')
+											| ×
+										h4
+											i.icon.fa.fa-check
+											| Success!
+										| !{messages.msg_info}
+								- if(messages.msg_error)
+									.alert.alert-danger.alert-dismissable
+										button.close(type='button', data-dismiss='alert', aria-hidden='true')
+											| ×
+										h4
+											i.icon.fa.fa-ban
+											| Alert!
+										| !{messages.msg_error}
+								.row
+									div(class="frmtodivdata")
+										.col-sm-3(id="frto" class="frmdiv")
+											<div class="sidebar" id="frto"> 
+											<label class="frm_text">From:</label>
+											<label id="fromd" class="frm_label" ></label>
+											</div>
+										.col-sm-3(id="tdo" class="todiv")
+											<div class="sidebar" id="tdo" > 
+											<label class="to_text">To:</label>
+											<label id ="tod" class="to_label"></label>  
+											</div>	
+									.col-xs-12
+										<div class= "retaildiv"  width="100%" style ="height:calc(100vh - 179px);padding-top:0px;">
+										<iframe  id="tractionanalytics"  width="100%" height="100%"></iframe>	
+										<div class="supemaildiv" id= "retadivnew">
+										<p> Please contact at <a class="suptext" href="https://www.smargtech.com/">support@smargtech.com</a></p>	
+										</div>
+										</div>									
+			include ../layout/footer.jade
+			include ../layout/common_js.jade
+			script(type='text/javascript', src='/js/commonjs/site_date_filter.js')
+			script(type='text/javascript', src='/js/traction_analysis.js')
+			//- script(type='text/javascript', src='/js/timefilter.js')

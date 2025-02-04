@@ -1,0 +1,135 @@
+doctype html
+html
+    head
+        include ../layout/common_css.jade
+    //- link(rel='stylesheet', href='/css/support.css')
+    body.hold-transition.skin-blue.sidebar-mini.support
+        .wrapper
+            include ../layout/navigation.jade
+            include ../layout/sidebar.jade
+            .content-wrapper.contentwp.webScroll
+                section.content-header(class="dplnone")  
+                    h1 
+                        | Support
+                section.content.contentcss
+                    .box
+                        .box-header.with-border
+                            .row
+                                .col-sm-12.txtcenter
+                                    div(class="abc")
+                                        h1()
+                                            | Raise a Ticket
+                        .box-body
+                            - if(messages.msg_info)
+                                .alert.alert-success.alert-dismissable
+                                    button.close(type='button', data-dismiss='alert', aria-hidden='true')
+                                        | ×
+                                    h4
+                                        i.icon.fa.fa-check
+                                        | Success!
+                                    | !{messages.msg_info}
+                            - if(messages.msg_error)
+                                .alert.alert-danger.alert-dismissable
+                                    button.close(type='button', data-dismiss='alert', aria-hidden='true')
+                                        | ×
+                                    h4
+                                        i.icon.fa.fa-ban
+                                        | Alert!
+                                    | !{messages.msg_error}
+                            //- form(action="/support", method="post") 
+                            form(action="/support", enctype="multipart/form-data", method="post") 
+                            
+                                .row(class="mr20")
+                                    .col-sm-1
+                                    .col-sm-2
+                                        <label  class="control-label  site_label" >Name*</label>
+                                    .col-sm-3
+                                        input(type="text" name='name' class="form-control mandate")
+                                    .col-sm-1
+                                    .col-sm-1
+                                        <label  class="control-label site_label" >Site</label>
+                                    .col-sm-3
+                                        select(name='site_name' class="dropdowncolor form-control select2")
+                                            each datasite in data
+                                                option(value="#{datasite.site_name}") 
+                                                    | #{datasite.site_name} 
+                                    
+
+                                .row(class="mr20")
+                                    .col-sm-1
+                                    .col-sm-2
+                                        <label  class="control-label site_label" >Priority</label>
+                                    .col-sm-3
+                                        select(name="priority" class="dropdowncolor form-control select2")
+                                            option(value="high") 
+                                                | High
+                                            option(value="medium") 
+                                                | Medium
+                                            option(value="low") 
+                                                | Low
+                                    .col-sm-1
+                                    .col-sm-1
+                                        <label  class="control-label site_label" >Url</label>
+                                    .col-sm-3
+                                        input(type="text" name='url' class="form-control")
+                                    
+                                .row(class="mr20")
+                                    .col-sm-1
+                                    .col-sm-2
+                                        <label  class="control-label site_label" >Support Type</label>
+                                    .col-sm-3
+                                        select(name="support_type" class="dropdowncolor form-control select2") 
+                                            option(value="General Enquiries")
+                                                | General Enquiries
+                                            option(value="Technical Support")
+                                                | Technical Support
+                                            option(value="Abuse/Risk Support")
+                                                | Abuse/Risk Support
+                                    .col-sm-1
+                                
+
+
+                                .row(class="mr20")
+                                    .col-sm-1
+                                    .col-sm-2
+                                        <label  class="control-label site_label" >Ticket Subject*</label>
+                                    .col-sm-8
+                                        input(type="text" name="subject" class="form-control mandate")
+                                        
+                                .row(class="mr20")
+
+                                    .col-sm-1
+                                    
+                                    .col-sm-2
+                                        <label  class="control-label site_label" >Ticket Description*</label>
+                                    .col-sm-8
+                                        textarea(name="description" rows=4 cols=116 class="form-control mandate")
+
+
+                                .row(class="mr20")
+                                    .col-sm-1
+                                    .col-sm-2
+                                        <label  class="control-label site_label" >Ticket Attachment</label>
+                                        small Only Image and Excel files are allowed
+                                    .col-sm-3
+                                        label(for="support_attachment" class="btn btn-success") 
+                                            input(type="file" name="file" id="support_attachment" accept=".jpg, .jpeg, .png, .gif, .xls, .xlsx")
+                                            |   Related File
+                                        label(for="" class="control-label site_label") 
+                                            span()
+                                                | Uploaded File : 
+                                            span(id="uploaded-file-name")
+                                    .col-sm-1
+
+                                .row(class="mr20")
+                                    .col-sm-6
+                                    .col-sm-2
+                                        button(value="" class="btn btn-success")
+                                            | Submit
+                                    .col-sm-2
+                                
+            include ../layout/footer.jade
+            include ../layout/common_js.jade
+            script(type='text/javascript', src='/js/support.js')
+            script(type='text/javascript', src='/js/commonjs/site_date_filter.js')
+

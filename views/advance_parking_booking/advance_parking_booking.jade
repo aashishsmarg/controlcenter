@@ -1,0 +1,99 @@
+doctype html
+html
+	head
+		title
+			| ADVANCE PARKING
+		meta(content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport')
+		link(rel='stylesheet', href='/adminlte/bootstrap/css/bootstrap.min.css')
+		link(rel='stylesheet', href='/font-awesome/css/font-awesome.css')
+		script(src="/advance_parking_booking_assets/js/jquery.min.js")
+		script(src="/advance_parking_booking_assets/js/popper.min.js")
+		script(src="/advance_parking_booking_assets/js/bootstrap.min.js")
+		link(rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css')
+		link(rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.css")
+		script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js")
+		script(src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js")
+		script(src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js")
+		script(src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js")
+		script(type="text/javascript",src="/advance_parking_booking_assets/js/advanceparkingbooking.js")
+
+		link(rel='stylesheet', href='/adminlte/plugins/iCheck/square/blue.css')
+		link(rel="shortcut icon" href="/images/SMARG_LOGO.png" type="image/png")
+		link(rel='stylesheet', href='/css/haeadercolor.css')
+		link(rel='stylesheet',href='/advance_parking_booking_assets/css/style.css')
+		
+	div
+
+		div(class="container mt-4")
+		
+			.row 
+				div(class="col-md-6 col-md-offset-3",id="form")
+					img.img(src="/advance_parking_booking_assets/img/SMARG_LOGO.jpg" alt="top-logo")
+					h4(class="h4 headingtb") Advance Parking Booking
+					a(href="/SmartParking/AdvanceBookingSearch?parkingname=#{parking_name}&availablespace=#{available_space}",class="floatright") Search Previous Booking
+					br
+					form(class="registration_form" method="post" action="parking" id="registeration_form" autocomplete="off")
+						- if(messages.message)
+							.alert.alert-success.alert-dismissable#mainsuccessMessage
+								button.close(type='button', data-dismiss='alert', aria-hidden='true')
+									| ×
+								p
+								i.icon.fa.fa-check
+									
+								| !{messages.message}
+						
+						
+				
+						.form-group
+							label.lbl Parking Site
+							input(type="text",value="#{parking_name}",name="parking_name",class="form-control",placeholder="Parking_Place", readonly)
+						.form-group
+							label.lbl Parking Availibility
+							input(type="text",value="#{available_space}",name="available_space",class="form-control",placeholder="PARKING CAPACITY", readonly)
+						.form-group 
+							label.lbl Mobile Number
+							input(type="text",name="mobile_number",value="#{mobile_number}",class="form-control",placeholder="Enter Mobile Number",id="mobilenumber",onkeyup="mobilecheck()" required)
+							span(id="err1") 
+						.from-group 
+							label.lbl Vehicle Number
+							input(type="text",name="vehicle_number",value="#{vehicle_number}",class="form-control",placeholder=" Enter Vehicle Number",id="vehiclenumber",onkeyup="vehiclenumber_check()" required)
+							span(id="err2") 
+						.from-group
+							label.lbl Parking Start Time
+							div(class='input-group date', id='datetimepicker1')
+								input(type="text",class="form-control",name="parking_starttime",value="#{parking_starttime}",onfocusout="calculateParkingAmount()" ,required)
+								span(class="input-group-addon")
+									span(class="glyphicon glyphicon-calendar")
+						.from-group
+							label.lbl Parking End Time
+							div(class='input-group date',id='datetimepicker2')
+								input(type="text",class="form-control",onfocusout="calculateParkingAmount()",value="#{parking_endtime}",name="parking_endtime",required)
+								span(class="input-group-addon")
+									span(class="glyphicon glyphicon-calendar")
+						div.flexcontainer
+							label.lbl Parking Charges
+							div
+								input(type="text" class="inputFielde" id="parkingAmt",name="parking_charges",value="#{parking_charges}" readonly)
+								&nbsp;
+								&nbsp;
+								&nbsp;
+								&nbsp;
+								&nbsp;
+
+								label.lbl Pay parking fees at the time of Parking
+						
+						.from-group
+							br
+							
+							center 
+								button(type="submit" class="btn btn-success pd10") SUBMIT
+						br 
+						
+						.form-group 
+			
+							div(class="powered_by text-center")
+								p(class="mb-0") Powered by Smarg
+								a(class="mb-0",href="https://www.smargtech.com") www.smargtech.com
+							div(class="copy_rights text-center")
+								p(class="mb-0")
+								small ©2024 Smarg Technologies Pvt. Ltd. All rights reserved

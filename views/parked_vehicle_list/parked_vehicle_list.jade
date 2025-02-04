@@ -1,0 +1,257 @@
+doctype html
+html
+	head
+		include ../layout/common_css.jade
+		link(rel='stylesheet', href='/css/violationlist.css')
+	body.hold-transition.skin-blue.sidebar-mini
+		.wrapper
+			include ../layout/navigation.jade
+			include ../layout/sidebar.jade
+			.content-wrapper
+					section.content-header(class="dplnone")  
+						h1 
+							| Parked Vehicles
+					section.content.contentcss
+						.box
+							<div class="overlay dplnone" id="loadingscrollervioltn">
+							<div class="loader">Loading...</div>
+							</div>
+							div(class="box-header with-border" style="width:100%")
+								.row
+									<label class="col-sm-2 control-label site_label">Site</label>		
+									<div class="modal fade" id="mymodelpopup" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+									<div class="modal-dialog" role="document">
+									<div class="modal-content">
+									<div class="modal-header mdheader">
+									<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+									<span class="modal-title" id="mymodelpopup">Vehicle List Report</span>
+									</div>
+									<div class="modal-body">
+									<div class="form-group mbdy_fromgrp">
+									<div class="col-sm-2 numbs">
+									<label for="team_name-inline"  class="mfrmlabel_cal">From</label>
+									</div>
+									<div class='col-sm-4'>
+									<div class="form-group">
+									<div class='input-group date' id='datepicker3'>
+									<input type='text' class="form-control" name = "datepicker3data" id ="datepicker3data"/>
+									<span class="input-group-addon">
+									<span class="glyphicon glyphicon-calendar"></span>
+									</span>
+									</div>
+									</div>
+									</div>
+									<div class="col-sm-2 numbs">
+									<label for="team_name-inline"  class="mtolabel_cal">To</label>
+									</div>
+									<div class='col-sm-4'>
+									<div class="form-group">
+									<div class='input-group date' id='datepicker4'>
+									<input type='text' class="form-control"  name = "datepicker4data" id ="datepicker4data"/>
+									<span class="input-group-addon">
+									<span class="glyphicon glyphicon-calendar"></span>
+									</span>
+									</div>
+									</div>
+									</div>
+									</form>
+									</div>
+									<div class="pdf grpreport" id="report">
+									<div  class="dplnone">
+									<input type="radio" id="ritemb" name="optradio" value="0" checked>
+									<label for="ritemb">XLS Report</label>
+									</div>
+									</div>
+									</div>
+									<div class="modal-footer">
+									<button type='submit' class="btn btn-success" onclick="download_parked_vehicle_report('#{sccauth_token},#{v_siteid}')">Download Report</button>
+									<button type="button" class="btn btn-success" id='close-button' data-dismiss="modal">Close</button>											</div>
+									</div>
+									</div>
+									</div>						
+									.col-sm-3
+										div
+											select(name='sitefiltervehicleanpr' class="sitefiltervehicleanpr dropdowncolor").form-control.select2
+												each datasite in datas								
+													option(value="#{datasite.site_id},#{datasite.is_vehicle_img_add},#{datasite.is_TW_Reporting},#{datasite.is_FW_Reporting}" selected = ( "#{datasite.site_id}" === "#{v_siteid}")) 
+														| #{datasite.site_name}	
+									<label  class="col-sm-1 control-label vehicleType_label" >Vehicle Type</label>		
+									.col-sm-2
+										div
+											select(name='vehicleTypeFilter' class="vehiclefilter dropdowncolor" id="vehcielTypeF").form-control.select2								
+													option(value="4_Wheeler") 
+														| 4 Wheeler		
+													option(value="2_Wheeler") 
+														| 2 Wheeler		
+														
+									.col-sm-2.btn-parked
+										<a href="#mymodelpopup" data-toggle="modal"><button type="button" class="btn btn-success greport" style ="margin-left:0px;" id="generateReport">Generate Report</button></a>
+									<div class="col-sm-3 mdpopupdiv"><div id="example7_filter" class="dataTables_filter search-parked"><label><span></span><input type="search" id ="txt-searchapnr" class="form-control input-sm" placeholder="Search Vehicle Number"  aria-controls="example7" name="sitenamed"></label></div></div>				
+								
+								.row(style='margin-top: -34px;')
+									td
+									div(class="colmddiv")
+									<div class="modal fade" id="waitmodel" tabindex="-1" role="dialog" aria-labelledby="waitmodel">
+									<div class="modal-dialog" role="document">
+									<div class="modal-content">
+									<div class="modal-header mdheader">
+									<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+									<span class="modal-title" id="waitmodel">Vehicle List Report</span>
+									</div>
+									<div class="modal-body">
+									<div class="form-group mbdy_fromgrp" >
+									<div class="row-sm-2 numbs">
+									<p class="genrep_btn">Generating Report</p>
+									<p class="genrep_btn">Report will share on your mail soon.</p>
+									</div>
+									</form>
+									</div>
+									<div class="modal-footer">
+									<button type="button" class="btn btn-success" id='close-button' data-dismiss="modal">Close</button></div>
+									</div>
+									</div>
+									</div>			
+							
+							.box-body
+								<div id="nodatafound" style=" display:none;">
+								<div id="div_content" style="color:black;font-size:16px;text-align:center;font-weight:bold;"></div>
+								</div>	
+								- if(messages.msg_info)
+									.alert.alert-success.alert-dismissable
+										button.close(type='button', data-dismiss='alert', aria-hidden='true')
+											| 
+										h4
+											i.icon.fa.fa-check
+											| Success!
+										| !{messages.msg_info}
+								- if(messages.msg_error)
+									.alert.alert-danger.alert-dismissable
+										button.close(type='button', data-dismiss='alert', aria-hidden='true')
+											| 
+										h4
+											i.icon.fa.fa-ban
+											| Alert!
+										| !{messages.msg_error}
+								<div id="vehiclelistdata">
+								<div class="vehscroll">
+								table(id="example8" class="table table-bordered table-hover search-parked-web")
+									thead
+										tr
+											th(valign="center" class="vcenter") S.No.
+											//- th(id="DateTime" class="vcenter") DateTime
+											th(class="vcenter vehicleimage" id="NumberPlateImg") Vehicle Image
+											th(id="CheckInTime" class="vcenter") Recent Check-In Time
+											th(id="LaneIn" class="vcenter") Lane In
+											th(id="CheckOutTime" class="vcenter") Recent Check-Out Time
+											th(id="LaneOut" class="vcenter") Lane Out	
+											if(debug ===0)						
+												th(id="ANPR" class="vcenter") Vehicle Number
+												th(id="Duration" class="vcenter") Dwell Time(In Hr)
+													//-	<i class="fa fa-caret-up sort-orderup" aria-hidden="true"></i>  
+													//-	<i class="fa fa-caret-down sort-orderdown" aria-hidden="true"></i>																		
+												//- th(id="VehicleType" class="vcenter") Vehicle Type
+												th(id="FirstVisit" class="vcenter") First Visited
+												th(id="LastVisit" class="vcenter") Last Visited
+												th(id="ANPRCount" class="vcenter") Total Visits
+												//-	<i class="fa fa-caret-up sort-orderup" aria-hidden="true"></i>  
+												//-	<i class="fa fa-caret-down sort-orderdown" aria-hidden="true"></i>								
+									tbody
+											if messages.msg_error
+												| !{messages.msg_error}
+											else
+												for row, index in data 
+													tr()									
+														td #{index+1}
+														//- td #{row.DateTime_New}
+														td(href="#myModalpopupanpr" id = "vehicleanpr" data-toggle="modal" data-book-id="#{row.id}" class="vehicleanpr")
+															//- <img src ="data:image/png;base64,#{row.NumberPlateImage}" alt = '' style="width:90px;height:auto;margin-left: 5px;"/>
+															<img src ="#{row.NumberPlateImage}" alt = '' style="width:90px;height:auto;margin-left: 5px;"/>
+														td #{row.CheckInTime}
+														td #{row.LaneIn}										
+														td #{row.CheckOutTime}	
+														td #{row.LaneOut}	
+														if(debug ===0)									
+															td #{row.ANPR}										
+															td #{row.Duration}										
+															//- td #{row.VehicleType}
+															td #{row.FirstVisit}
+															td #{row.LastVisit}
+															td #{row.TotalVisit}	
+														<td>			
+														<div class="modal fade" id="myModalpopupanpr" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+														<div class="modal-dialog" role="document">
+														<div class="modal-content">
+														<div class="modal-header">
+														<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+														<h4 class="modal-title" id="myModalLabel">Vehicle Image</h4>
+														</div>
+														<div class="modal-body">
+														<img alt = '' id = "vehicleanpr_img" style="width:280px;height:auto;"/>
+														
+														</div>
+														<div class="modal-footer">
+														<button type="button" class="btn btn-success" data-dismiss="modal">Close</button>
+														//- <button type="button" class="btn btn-primary">Save changes</button>
+														</div>
+														</div>
+														</div>
+														</div>	
+														</td>	
+														</div>
+														</div>																								
+							div(class ="paginationdiv")
+								if pageCount > 1
+									ul.pagination
+										if (currentPage == 1)
+											li(class="disabled")
+												a() &laquo; First
+										if currentPage > 1
+											li
+												a(href='/vehiclelistanpr/data/#{v_siteid}/?page=1&searchanpr=#{searchanpr}&sortdataanpr=DateTime&ordertypeanpr=des')  &laquo; First
+										- var y = parseInt(currentPage)-1
+										- var z = parseInt(currentPage)+1
+										if currentPage > 1
+											li
+												a(href="/vehiclelistanpr/data/#{v_siteid}/?page="+y+"&searchanpr=#{searchanpr}&sortdataanpr=DateTime&ordertypeanpr=des")  &#8249;							
+										- var x = 1	
+										if currentPage > x
+											- x = x + (currentPage -1)
+										if currentPage >= (pageCount-4)
+											if	x >	1	
+												- x = pageCount-1	
+											if	x >	2	
+												- x = pageCount-2
+											if	x >	3	
+												- x = pageCount-3
+											if x > 4
+												- x = pageCount-4											
+										if (x !== 1)
+											li.disabled
+												//- a(href='#') ...
+										- for (x; x <= pageCount; x++)
+											if( currentPage == x)
+												li.active
+													span.sr_only
+														= currentPage
+											else
+												li
+													a(href= "/vehiclelistanpr/data/#{v_siteid}/?page="+x+"&searchanpr=#{searchanpr}&sortdataanpr=DateTime&ordertypeanpr=des" )
+														= x
+											if x == (z+3)
+												li.disabled
+													//- a(href="#") ...
+													- break
+										if currentPage != pageCount
+											li
+												a(href= href="/vehiclelistanpr/data/#{v_siteid}/?page="+z+"&searchanpr=#{searchanpr}&sortdataanpr=DateTime&ordertypeanpr=des") &#8250;								
+										if currentPage != pageCount
+											li
+												a(href= "/vehiclelistanpr/data/#{v_siteid}/?page=#{Math.floor(pageCount)}"+"&searchanpr=#{searchanpr}&sortdataanpr=DateTime&ordertypeanpr=des") Last &raquo;
+										if (currentPage == pageCount)
+											li(class="disabled")
+												a() Last &raquo;							
+			include ../layout/footer.jade
+			include ../layout/common_js.jade
+			//- script(type='text/javascript', src='/js/commonjs/site_date_filter.js')
+			script(type='text/javascript', src='/js/vehicle_list.js')
+			//- script(type='text/javascript', src='/js/timefilter.js')

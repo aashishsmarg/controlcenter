@@ -1,0 +1,136 @@
+doctype html
+html
+	head
+		include ../layout/common_css.jade
+		//- link(rel='stylesheet', href='/css/vehicletrends.css')
+	body.hold-transition.skin-blue.sidebar-mini
+		.wrapper
+			include ../layout/navigation.jade
+			include ../layout/sidebar.jade
+			.content-wrapper.contentwp.webScroll
+					section.content-header(class="dplnone")  
+						h1 
+							| Vehicle Trends
+					section.content.contentcss
+						.box
+							.box-header.with-border
+								.row
+									<label  class="col-sm-1 control-label timeflt_label" >Duration</label>		
+									.col-sm-2
+										div
+											select(name='datefilter' class="datefilter dropdowncolor").form-control.select2
+													option(value="today") 
+														| Today
+													option(value="yesterday") 
+														| Yesterday 									
+													option(value="week") 
+														| This Week
+													option(value="thismonth") 
+														| This Month
+													option(value="3month") 
+														| 3 Months	
+													option(value="6month") 
+														| 6 Months	
+													option(value="custom") 
+														| Custom										
+									<label  class="col-sm-1 control-label site_label" >Site</label>		
+									.col-sm-3
+										div
+											select(name='sitefilter' class="sitefilter dropdowncolor" id="sitef").form-control.select2
+												each datasite in data									
+													option(value="#{datasite.site_id},#{datasite.dashboard_version},#{datasite.start_time},#{datasite.end_time},#{datasite.vehicledashboard_version},#{datasite.two_w_vehicle_dashboard_version}") 
+														| #{datasite.site_name}
+									
+									<label  class="col-sm-1 control-label vehicleType_label" >Vehicle Type</label>		
+									.col-sm-3
+										div
+											select(name='vehicleTypeFilter' class="vehiclefilter dropdowncolor" id="vehcielTypeF").form-control.select2
+													option(value="4_Wheeler") 
+														| 4 Wheeler		
+													option(value="2_Wheeler") 
+														| 2 Wheeler		
+									.col-sm-3 
+										div
+										<div class="modal fade" id="custom" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+										<div class="modal-dialog" role="document">
+										<div class="modal-content">
+										<div class="modal-header mdheader" >
+										<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+										<span class="modal-title" id="custom">Select Duration</span>
+										</div>
+										<div class="modal-body">
+										<div class="row">
+										<div class="form-group mbdy_fromgrp">
+										<div class="col-sm-2 numbs">
+										<label for="team_name-inline" class="mfrmlabel_cal">From</label>
+										</div>
+										<div class="col-sm-4">
+										<div class="input-group date">
+										<div class="input-group-addon">
+										<i class="fa fa-calendar"></i>
+										</div>
+										<input type="text" class="form-control pull-right" id="from">
+										</div>
+										</div>
+										<div class="col-sm-2 numbs">
+										<label for="team_name-inline" class="mtolabel_cal">To</label>
+										</div>
+										<div class="col-sm-4">
+										<div class="input-group date">
+										<div class="input-group-addon">
+										<i class="fa fa-calendar"></i>
+										</div>
+										<input type="text" class="form-control pull-right" id="to">
+										</div>
+										</div>
+										</form>
+										</div>
+										</div>
+										</div>			
+										<div class="modal-footer">
+										button(type='submit' class="btn btn-success" onclick="vehicle_analytics_dashboard()") Ok
+										<button type="button" class="btn btn-success" id='closer' onclick="canclebtnclick()" data-dismiss="modal">Cancel</button></div>
+										</div>
+										</div>
+										</div>																																		
+							.box-body
+								- if(messages.msg_info)
+									.alert.alert-success.alert-dismissable
+										button.close(type='button', data-dismiss='alert', aria-hidden='true')
+											| ×
+										h4
+											i.icon.fa.fa-check
+											| Success!
+										| !{messages.msg_info}
+								- if(messages.msg_error)
+									.alert.alert-danger.alert-dismissable
+										button.close(type='button', data-dismiss='alert', aria-hidden='true')
+											| ×
+										h4
+											i.icon.fa.fa-ban
+											| Alert!
+										| !{messages.msg_error}
+								.row
+									div(class="frt_date_row")
+										.col-sm-3(id="frto" class="frmdiv")
+											<div class="sidebar" id="frto"> 
+											<label class="frm_text">From:</label>
+											<label id="fromd" class="frm_label" ></label>
+											</div>
+										.col-sm-3(id="tdo" class="todiv")
+											<div class="sidebar" id="tdo" > 
+											<label class="to_text">To:</label>
+											<label id ="tod" class="to_label"></label>  
+											</div>	
+									.col-xs-12
+										<div class= "vehicdiv"  width="100%" >
+										<iframe  id="vehicanalytics"  width="100%" height="100%"></iframe>
+										<div style="position:absolute;top:10px;right:50%;visibility:hidden; display: hidden;" id= "vehicdivnew">
+										<p> Please contact at <a style="color: blue ; text-align: center;font-size:14px;width:3.75%;" href="https://www.smargtech.com/">support@smargtech.com</a></p>	
+										</div>
+										</div>							
+			include ../layout/footer.jade
+			include ../layout/common_js.jade
+			script(type='text/javascript', src='/js/commonjs/site_date_filter.js')
+			script(type='text/javascript', src='/js/vehicletrends.js')
+			//- script(type='text/javascript', src='/js/timefilter.js')
