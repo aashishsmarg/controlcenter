@@ -7,7 +7,7 @@ router.get('/' ,  async(req , res) => {
         const {userId : user_id , username , role : userrole} = req.session
     
     
-        result = await commonModel.getSiteAndTimeBySessionData(req.session)
+        result =[]
         
         v_siteid = result[0]?.site_id
         res.json({ title: "Advertising Analytics", data1: result, username: username, userrole: userrole, v_siteid: v_siteid });
