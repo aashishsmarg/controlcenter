@@ -1,16 +1,16 @@
 import {  router , logger , authMiddleware , exec  } from '../utils/imports.js'
 import { commonModel } from '../model/model.imports.js'
 
-router.get('/addashboard' , authMiddleware , async(req , res) => {   
+router.get('/' ,  async(req , res) => {   
     let result , v_siteid
     try{
         const {userId : user_id , username , role : userrole} = req.session
     
     
-        result = await commonModel.getSiteAndTimeBySessionData(req.session)
+        result =[]
         
         v_siteid = result[0]?.site_id
-        res.render('advertising_analytics/ad_analytics', { title: "Advertising Analytics", data: result, username: username, userrole: userrole, v_siteid: v_siteid });
+        res.json({ title: "Advertising Analytics", data1: result, username: username, userrole: userrole, v_siteid: v_siteid });
     } catch(er){
         logger.error(`Error in addashboard controller , GET method - advertisment.dashboard.controller.js : ${er}`)
     }

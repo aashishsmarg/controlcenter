@@ -1,10 +1,10 @@
-import { mysql , dotenv ,util } from '../utils/imports.js'
+import { mysql , dotenv } from '../utils/imports.js'
 dotenv.config()
 
 // Implement the singleton here
 class DBInstance{
     constructor(){
-        if(DBInstance.instance){
+        if(DBInstance){
             return DBInstance.instance
         }
         this.pool = mysql.createPool({
